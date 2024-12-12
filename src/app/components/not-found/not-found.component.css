@@ -1,0 +1,45 @@
+.not-found-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    background-color: black;
+    color: var(--golden);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.error-code {
+    font-size: 10rem;
+    font-weight: bold;
+    color: var(--golden);
+    margin: 0;
+}
+
+.error-message {
+    font-size: 1.5rem;
+    margin: 20px 0;
+    color: white;
+    opacity: 0.8;
+}
+
+.back-home-btn {
+    font-size: 1rem;
+    text-decoration: none;
+    background-color: var(--golden);
+    color: black;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: transform 0.3s, background-color 0.3s;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(228, 203, 134, 0.3);
+    cursor: pointer;
+}
+
+.back-home-btn:hover {
+    background-color: #d6b878;
+    transform: scale(1.05);
+    box-shadow: 0 6px 8px rgba(228, 203, 134, 0.5);
+}
