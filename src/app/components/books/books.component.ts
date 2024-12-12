@@ -7,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './books.component.css'
 })
 export class BooksComponent {
+  isDropdownVisible = false;
 
+  toggleDropdown() {
+    this.isDropdownVisible = !this.isDropdownVisible;
+  }
 }
