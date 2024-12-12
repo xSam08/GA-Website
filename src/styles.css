@@ -2,6 +2,14 @@
     --golden: #E4CB86;
 }
 
+* {
+    font-family: 'Montserrat';
+}
+
+body {
+    font-family: 'Montserrat';
+}
+
 html, body {
     height: 100%;
     margin: 0;

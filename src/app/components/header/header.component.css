@@ -42,3 +42,7 @@
     background-color: #383838;
     color: var(--golden);
 }
+
+.navbar-toggler-icon {
+    color: white;
+}
