@@ -1,59 +1,25 @@
 # GAWebsite
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.4.
+Este proyecto está dedicado a la vida de **Germán Arciniegas Price**, mi tío. Un homenaje a su legado. La página incluye secciones sobre su biografía, sus canciones y discos, sus libros escritos, y una página de contacto.
 
-## Development server
+## Descripción del Proyecto
 
-To start a local development server, run:
+**GAWebsite** es una página web interactiva y visualmente atractiva, que presenta diversos aspectos de la vida de Germán Arciniegas. En ella se pueden encontrar:
 
-```bash
-ng serve
-```
+- **Biografía**: Una sección completa sobre su vida y quién es como persona.
+- **Música**: Discografía y canciones de Germán Arciniegas.
+- **Libros**: Un listado de sus obras literarias.
+- **Contacto**: Una forma para que los usuarios se pongan en contacto.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Tecnologías Utilizadas
 
-## Code scaffolding
+Este proyecto fue creado con **Angular 19** y usa varias tecnologías web modernas como:
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- **HTML5** y **CSS3**
+- **Bootstrap** para la maquetación responsiva
+- **FontAwesome** para los íconos sociales
+- **Google Fonts** para tipografía personalizada
 
-```bash
-ng generate component component-name
-```
+## Desarrollador
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Este sitio fue desarrollado por **Samuel Osuna Muñoz**, un apasionado desarrollador con un enfoque en la creación de experiencias web interactivas y funcionales. Puedes encontrar más sobre mi trabajo en [mi GitHub](https://github.com/xSam08).
