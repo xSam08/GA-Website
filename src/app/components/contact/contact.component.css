@@ -1,0 +1,47 @@
+.form-label {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: white;
+}
+
+.fa-envelope {
+    color: var(--golden);
+    font-size: 1.3rem;
+}
+
+.mailtext {
+    color: var(--golden);
+    font-size: 1.3rem;
+}
+
+.margin {
+    margin-right: 5px;
+}
+
+.mailarea {
+    margin-top: 100px;
+}
+
+.mail {
+    color: white;
+    font-size: 1.3rem;
+}
+
+.text-danger {
+    font-weight: 600;
+}
+
+.border-danger {
+    border:2px solid red;
+}
+
+.label-error {
+    color: red;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.btn-primary:hover {
+    background-color: #bfab74 !important;
+    cursor: pointer;
+}

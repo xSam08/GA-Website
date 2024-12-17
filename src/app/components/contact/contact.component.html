@@ -1,1 +1,186 @@
-<p>contact works!</p>
+<div class="container mt-5">
+
+    <!-- Mail me area -->
+    <div class="row mb-5 mailarea">
+        <div class="col-12">
+            <i class="fa-solid fa-envelope margin"></i>
+            <span class="mailtext">
+                Envíame un Correo
+            </span>
+        </div>
+        <div class="col-12">
+            <a href="mailto:contact&#64;germanarciniegas.life" class="mail">
+                contact&#64;germanarciniegas.life
+            </a>
+        </div>
+    </div>
+
+    <!-- Contact Form -->
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+        
+        <!-- First row: First Name y Second Name -->
+        <div class="row">
+            <div class="col-12 col-md-6 mb-4">
+                <label
+                    for="firstName"
+                    class="form-label"
+                    [ngClass]="{
+                        'text-danger': 
+                        contactForm.get('firstName')?.invalid && 
+                        contactForm.get('firstName')?.touched
+                    }"
+                >Nombre</label>
+                <input
+                    type="text"
+                    class="form-control mb-2"
+                    id="firstName"
+                    placeholder="Ingresa tu nombre"
+                    formControlName="firstName"
+                    autocomplete="off"
+                    [ngClass]="{
+                        'border-danger': 
+                        contactForm.get('firstName')?.invalid && 
+                        contactForm.get('firstName')?.touched
+                    }"
+                >
+                <span *ngIf="contactForm.get('firstName')?.invalid && contactForm.get('firstName')?.touched" class="text-danger">
+                    <i class="fa-solid fa-triangle-exclamation fa-beat margin"></i> 
+                    El nombre es obligatorio y mínimo 3 carácteres
+                </span>
+            </div>
+            <div class="col-12 col-md-6 mb-4">
+                <label
+                    for="secondName"
+                    class="form-label"
+                    [ngClass]="{
+                        'text-danger': 
+                        contactForm.get('secondName')?.invalid && 
+                        contactForm.get('secondName')?.touched
+                    }"
+                >Apellido</label>
+                <input
+                    type="text"
+                    class="form-control mb-2"
+                    id="secondName"
+                    placeholder="Ingresa tu apellido"
+                    formControlName="secondName"
+                    autocomplete="off"
+                    [ngClass]="{
+                        'border-danger': 
+                        contactForm.get('secondName')?.invalid && 
+                        contactForm.get('secondName')?.touched
+                    }"
+                >
+                <span *ngIf="contactForm.get('secondName')?.invalid && contactForm.get('secondName')?.touched" class="text-danger">
+                    <i class="fa-solid fa-triangle-exclamation fa-beat margin"></i> 
+                    El apellido es obligatorio y mínimo 3 carácteres
+                </span>
+            </div>
+        </div>
+
+        <!-- Second row: E-Mail -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <label
+                    for="email"
+                    class="form-label"
+                    [ngClass]="{
+                        'text-danger': 
+                        contactForm.get('email')?.invalid && 
+                        contactForm.get('email')?.touched
+                    }"
+                >E-Mail</label>
+                <input
+                    type="email"
+                    class="form-control mb-2"
+                    id="email"
+                    placeholder="Ingresa tu correo electrónico"
+                    formControlName="email"
+                    [ngClass]="{
+                        'border-danger': 
+                        contactForm.get('email')?.invalid && 
+                        contactForm.get('email')?.touched
+                    }"
+                >
+                <span *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched" class="text-danger">
+                    <i class="fa-solid fa-triangle-exclamation fa-beat margin"></i> 
+                    El correo es inválido
+                </span>
+            </div>
+        </div>
+
+        <!-- Third row: Subject -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <label
+                    for="subject"
+                    class="form-label"
+                    [ngClass]="{
+                        'text-danger': 
+                        contactForm.get('subject')?.invalid && 
+                        contactForm.get('subject')?.touched
+                    }"
+                >Asunto</label>
+                <input
+                    type="text"
+                    class="form-control mb-2"
+                    id="subject"
+                    placeholder="Ingresa el asunto"
+                    formControlName="subject"
+                    [ngClass]="{
+                        'border-danger': 
+                        contactForm.get('subject')?.invalid && 
+                        contactForm.get('subject')?.touched
+                    }"
+                >
+                <span *ngIf="contactForm.get('subject')?.invalid && contactForm.get('subject')?.touched" class="text-danger">
+                    <i class="fa-solid fa-triangle-exclamation fa-beat margin"></i> 
+                    El asunto debe tener al menos 10 carácteres 
+                    (actualmente {{ contactForm.get('subject')?.value.length }})
+                </span>
+            </div>
+        </div>
+
+        <!-- Fourth row: Message -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <label
+                    for="message"
+                    class="form-label"
+                    [ngClass]="{
+                        'text-danger': 
+                        contactForm.get('message')?.invalid && 
+                        contactForm.get('message')?.touched
+                    }"
+                >Mensaje</label>
+                <textarea
+                    class="form-control mb-2"
+                    id="message"
+                    rows="4"
+                    placeholder="Escribe tu mensaje"
+                    formControlName="message"
+                    autocomplete="off"
+                    [ngClass]="{
+                        'border-danger': 
+                        contactForm.get('message')?.invalid && 
+                        contactForm.get('message')?.touched
+                    }"
+                ></textarea>
+                <span *ngIf="contactForm.get('message')?.invalid && contactForm.get('message')?.touched" class="text-danger">
+                    <i class="fa-solid fa-triangle-exclamation fa-beat margin"></i> 
+                    El mensaje debe tener al menos 30 carácteres 
+                    (actualmente {{ contactForm.get('message')?.value.length }})
+                </span>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="row pt-3">
+            <div class="col-12 col-md-3">
+                <button type="submit" class="btn btn-primary w-100" [disabled]="contactForm.invalid">
+                    Enviar Mensaje
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
