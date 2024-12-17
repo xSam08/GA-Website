@@ -1,25 +1,26 @@
 # GA-Website
 
-Este proyecto está dedicado a la vida de **Germán Arciniegas Price**, mi tío. Un homenaje a su legado. La página incluye secciones sobre su biografía, sus canciones y discos, sus libros escritos, y una página de contacto.
+This project is dedicated to the life of **German Arciniegas Price**, my uncle. A tribute to his legacy. The website includes sections about his biography, his songs and albums, his written books, and a contact page.
 
-## Descripción del Proyecto
+## Project Description
 
-**GA-Website** es una página web interactiva y visualmente atractiva, que presenta diversos aspectos de la vida de Germán Arciniegas. En ella se pueden encontrar:
+**GA-Website** is an interactive and visually appealing website that presents various aspects of Germán Arciniegas' life. It features:
 
-- **Biografía**: Una sección completa sobre su vida y quién es como persona.
-- **Música**: Discografía y canciones de Germán Arciniegas.
-- **Libros**: Un listado de sus obras literarias.
-- **Contacto**: Una forma para que los usuarios se pongan en contacto.
+- **Biography**: A comprehensive section about his life and who he was as a person.
+- **Music**: Discography and songs of German.
+- **Books**: A list of his literary works.
+- **Contact**: A reactive form for users to get in touch.
 
-## Tecnologías Utilizadas
+## Technologies Used
 
-Este proyecto fue creado con **Angular 19** y usa varias tecnologías web modernas como:
+This project was created with **Angular 19** and uses several modern web technologies such as:
 
-- **HTML5** y **CSS3**
-- **Bootstrap** para la maquetación responsiva
-- **FontAwesome** para los íconos sociales
-- **Google Fonts** para tipografía personalizada
+- **HTML5** and **CSS3**
+- **Bootstrap** for responsive layout
+- **FontAwesome** for icons
+- **Google Fonts** for custom typography
+- **Pending...** for email sending
 
-## Desarrollador
+## Developer
 
-Este sitio fue desarrollado por **Samuel Osuna Muñoz**, un apasionado desarrollador con un enfoque en la creación de experiencias web interactivas y funcionales. Puedes encontrar más sobre mi trabajo en [mi GitHub](https://github.com/xSam08).
+This site was developed by **Samuel Osuna Muñoz**, a passionate developer focused on creating interactive and functional web experiences. You can learn more about my work on [my GitHub](https://github.com/xSam08).
