@@ -1,1 +1,93 @@
-<p>music works!</p>
+<div class="container mt-100">
+
+    <!-- Momentos -->
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <h2 class="heading">
+                Momentos
+            </h2>
+            <p class="text">
+                Este, mi primer disco, lanzado en 1995, reúne canciones compuestas entre finales de
+                1979 y 1994. El título del disco proviene de la primera canción, “Momentos”, con la
+                cual mi hija Ana María ganó el concurso intercolegial de música más importante de
+                Bogotá, organizado por Radioactiva, la emisora juvenil más popular en Colombia. <br><br>
+
+                Como premio, Radioactiva grabó un sencillo con dos canciones de mi autoría, incluyendo
+                “Momentos”, el cual comenzó a sonar en la emisora y se mantuvo en su ranking durante
+                varias semanas. Gracias a este éxito, Ana María tuvo la oportunidad de abrir el
+                concierto del reconocido cantante venezolano Ricardo Montaner, interpretando esta
+                canción ante miles de espectadores.
+            </p>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="music-player-container">
+
+                <!-- Heading, about the disk and Player Controls -->
+                <div class="container-header">
+                    <div class="col-3">
+                        <img
+                            src="assets/music/momentos/Cover.jpg"
+                            alt="Momentos Cover"
+                            class="album-cover"
+                        />
+                    </div>
+                    <div class="col-9 pe-4">
+                        <div class="album-info">
+                            <h2 class="album-title">Momentos</h2>
+                            <p class="artist-name">German Arciniegas</p>
+                        </div>
+
+                        <!-- Player Controls -->
+                        <div class="music-controls">
+                            <div class="progress-bar">
+                                <input type="range" value="0" max="100" class="progress-input" />
+                            </div>
+                            <div class="play-controls">
+                                <span class="current-time">{{ currentTime }}</span>
+                                <button class="play-btn">
+                                    <i
+                                        class="fa-solid"
+                                        [ngClass]="this.playing ? 'fa-pause' : 'fa-play'"
+                                        (click)="togglePlayPause()"    
+                                    ></i>
+                                </button>
+                                <span class="total-time">{{ this.selectedTrack.duration }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Songs List -->
+                <div class="container-track-list p-2">
+                    <div class="scrollable-content">
+                        <ul class="track-list">
+                            <li
+                                *ngFor="let track of momentosTracks; let i = index"
+                                class="track"
+                                (click)="playTrack(track)"
+                                [ngClass]="{'active': selectedTrack === track}"
+                            >
+                                <span class="track-number">{{ i + 1 }}</span>
+                                <div class="track-info">
+                                    <p class="track-title">{{ track.title }}</p>
+                                </div>
+                                <span class="track-duration">{{ track.duration || 'Loading...' }}</span>
+                                <div class="download" (click)="downloadTrack(track)">
+                                    <i class="fa-solid fa-download"></i>
+                                </div>
+
+                                <!-- Dynamic container to show the track lyrics -->
+                                <div *ngIf="selectedTrack === track" class="lyrics-container">
+                                    <p class="lyrics">
+                                        {{ track.lyrics }}
+                                    </p>
+                                </div>
+                                
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
