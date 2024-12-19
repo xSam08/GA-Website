@@ -46,3 +46,15 @@ li {
 .fa-brands {
     cursor: pointer;
 }
+
+a {
+    text-decoration: underline;
+    color: var(--golden);
+    font-weight: 600;
+}
+
+.fa-github {
+    color: white !important;
+    font-size: 1.1rem;
+    margin-left: 3px;
+}

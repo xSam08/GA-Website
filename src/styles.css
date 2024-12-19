@@ -33,9 +33,9 @@ footer {
 }
 
 .btn-primary {
-    background-color: var(--golden) !important;
-    border: none !important;
-    color: black !important;
+    background-color: #ffffff00 !important;
+    border: 1px solid var(--golden) !important;
+    color: white !important;
     font-weight: 600 !important;
     padding: 10px 20px !important;
     text-align: center !important;

@@ -1,13 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-music',
   standalone: true,
   imports: [
-    CommonModule,
-    HttpClientModule
+    CommonModule
   ],
   templateUrl: './music.component.html',
   styleUrl: './music.component.css'
