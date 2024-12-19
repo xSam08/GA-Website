@@ -40,7 +40,13 @@
                         <!-- Player Controls -->
                         <div class="music-controls">
                             <div class="progress-bar">
-                                <input type="range" value="0" max="100" class="progress-input" />
+                                <input
+                                    type="range"
+                                    class="progress-input"
+                                    [value]="audio.currentTime"
+                                    [max]="audio.duration"
+                                    (input)="updateCurrentTime($event)"
+                                />
                             </div>
                             <div class="play-controls">
                                 <span class="current-time">{{ currentTime }}</span>
@@ -58,7 +64,10 @@
                 </div>
 
                 <!-- Songs List -->
-                <div class="container-track-list p-2">
+                <div
+                    class="container-track-list p-2"
+                    [ngClass]="{ 'expanded': expandContainer }"
+                >
                     <div class="scrollable-content">
                         <ul class="track-list">
                             <li
@@ -72,15 +81,19 @@
                                     <p class="track-title">{{ track.title }}</p>
                                 </div>
                                 <span class="track-duration">{{ track.duration || 'Loading...' }}</span>
-                                <div class="download" (click)="downloadTrack(track)">
+                                <span 
+                                    class="download"
+                                    (click)="downloadTrack(track)"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    data-bs-title="Descargar la canción"
+                                >
                                     <i class="fa-solid fa-download"></i>
-                                </div>
+                                </span>
 
                                 <!-- Dynamic container to show the track lyrics -->
                                 <div *ngIf="selectedTrack === track" class="lyrics-container">
-                                    <p class="lyrics">
-                                        {{ track.lyrics }}
-                                    </p>
+                                    <p class="lyrics">{{ track.lyrics }}</p>
                                 </div>
                                 
                             </li>

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { AfterViewInit, Component } from '@angular/core';
 
 @Component({
   selector: 'app-music',
@@ -10,7 +11,7 @@ import { Component } from '@angular/core';
   templateUrl: './music.component.html',
   styleUrl: './music.component.css'
 })
-export class MusicComponent {
+export class MusicComponent implements AfterViewInit {
 
   private basePath = 'assets/music/';
   public audio = new Audio(); // Audio player global
@@ -18,6 +19,7 @@ export class MusicComponent {
   public currentTime = '0:00';
   public totalTime = '0:00';
   public playing = false;
+  public expandContainer = false;
 
   momentosTracks: any[] = [
     { title: 'Momentos', file: 'Momentos.mp3', duration: '', lyrics: 'Letra de Momentos...' },
@@ -34,11 +36,16 @@ export class MusicComponent {
     { title: 'Beatriz', file: 'Beatriz.mp3', duration: '', lyrics: '' }
   ];
 
-  constructor() {
+  constructor(private http: HttpClient) {
     // Update realtime the current time of the song
     this.audio.addEventListener('timeupdate', () => {
       this.currentTime = this.formatTime(this.audio.currentTime);
       this.totalTime = this.formatTime(this.audio.duration || 0);
+
+      const progressBar = document.querySelector('.progress-input') as HTMLInputElement;
+      if (progressBar) {
+        progressBar.value = this.audio.currentTime.toString();
+      }
     });
 
     // Reset the times when the song ends
@@ -50,7 +57,18 @@ export class MusicComponent {
 
   ngOnInit(): void {
     this.loadSongDurations();
-    //this.loadLyrics();
+    this.loadLyrics();
+  }
+
+  ngAfterViewInit(): void {
+    this.loadTooltips();
+  }
+
+  loadTooltips(): void {
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    const tooltipList = Array.from(tooltipTriggerList).map(tooltipTriggerEl => 
+      new (window as any).bootstrap.Tooltip(tooltipTriggerEl)
+    );
   }
 
   /**
@@ -70,22 +88,22 @@ export class MusicComponent {
   /**
    * Function to load the lyrics of each song in the audio player
    */
-  // loadLyrics(): void {
-  //   const lyricsPromises = this.momentosTracks.map(track => 
-  //     this.http.get(`assets/music/momentos/lyrics/${track.file.replace('.mp3', 'Lyrics.txt')}`, 
-  //     { responseType: 'text' }).toPromise()
-  //       .then(lyrics => {
-  //         track.lyrics = lyrics;
-  //       })
-  //       .catch(() => {
-  //         track.lyrics = 'Lyrics not found';
-  //       })
-  //   );
+  loadLyrics(): void {
+    const lyricsPromises = this.momentosTracks.map(track => 
+      this.http.get(`assets/music/momentos/lyrics/${track.file.replace('.mp3', 'Lyrics.txt')}`, 
+      { responseType: 'text' }).toPromise()
+        .then(lyrics => {
+          track.lyrics = lyrics;
+        })
+        .catch(() => {
+          track.lyrics = 'Lyrics not found';
+        })
+    );
 
-  //   Promise.all(lyricsPromises).then(() => {
-  //     console.log('All lyrics loaded');
-  //   });
-  // }
+    Promise.all(lyricsPromises).then(() => {
+      console.log('All lyrics loaded!');
+    });
+  }
 
   /**
    * Function to play a track in the audio player
@@ -98,6 +116,7 @@ export class MusicComponent {
       this.selectedTrack = { title: '', file: '', duration: 'Escoge una Canción', lyrics: '' };
       this.audio.src = '';
       this.playing = false;
+      this.expandContainer = false;
     } else {
       // Play the selected track
       this.selectedTrack = track;
@@ -105,6 +124,7 @@ export class MusicComponent {
       this.audio.load();
       this.audio.play();
       this.playing = true;
+      this.expandContainer = true;
       console.log(this.selectedTrack);
     }
   }
@@ -121,6 +141,12 @@ export class MusicComponent {
       this.audio.play();
       this.playing = true;
     }
+  }
+
+  updateCurrentTime(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.audio.currentTime = parseFloat(input.value);
+    this.currentTime = this.formatTime(this.audio.currentTime);
   }
 
   /**

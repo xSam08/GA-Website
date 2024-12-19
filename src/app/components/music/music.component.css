@@ -60,12 +60,8 @@
     gap: 10px;
 }
 
-.progress-bar input {
-    width: 100%;
-    appearance: none;
-    background: #666;
-    height: 4px;
-    border-radius: 4px;
+.progress-input {
+    accent-color: white;
 }
 
 .play-controls {
@@ -88,6 +84,11 @@
     border-bottom-right-radius: 10px;
     height: 200px;
     overflow: hidden;
+    transition: height 0.3s ease;
+}
+
+.container-track-list.expanded {
+    height: 400px;
 }
 
 .scrollable-content {
@@ -184,6 +185,7 @@
 }
 
 .lyrics {
+    white-space: pre-wrap;
     font-size: 0.85rem;
     color: #f8b7b2;
     padding: 10px;
