@@ -14,7 +14,7 @@ import { AfterViewInit, Component } from '@angular/core';
 export class MusicComponent implements AfterViewInit {
 
   private basePath = 'assets/music/';
-  public audio = new Audio(); // Audio player global
+  public audio: any; // Global audio player
   public selectedTrack = { title: '', file: '', duration: 'Escoge una Canción', lyrics: '' }; // Track selected by the user
   public currentTime = '0:00';
   public totalTime = '0:00';
@@ -36,7 +36,13 @@ export class MusicComponent implements AfterViewInit {
     { title: 'Beatriz', file: 'Beatriz.mp3', duration: '', lyrics: '' }
   ];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
+    this.audio = new Audio();  
+    this.loadSongDurations();
+    this.loadLyrics();
+
     // Update realtime the current time of the song
     this.audio.addEventListener('timeupdate', () => {
       this.currentTime = this.formatTime(this.audio.currentTime);
@@ -53,11 +59,6 @@ export class MusicComponent implements AfterViewInit {
       this.currentTime = '0:00';
       this.totalTime = '0:00';
     });
-  }
-
-  ngOnInit(): void {
-    this.loadSongDurations();
-    this.loadLyrics();
   }
 
   ngAfterViewInit(): void {
