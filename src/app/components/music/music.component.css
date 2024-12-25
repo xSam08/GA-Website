@@ -87,7 +87,11 @@
     border-bottom-right-radius: 10px;
     height: 200px;
     overflow: hidden;
-    transition: height 0.3s ease;
+    transition: height 0.4s ease;
+}
+
+.container-track-list.dejame {
+    height: 55px;
 }
 
 .container-track-list.expanded {
@@ -212,4 +216,9 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.separador {
+    border-top: 2px solid var(--golden);
+    width: 100px;
 }

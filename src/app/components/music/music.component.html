@@ -41,6 +41,7 @@
                         <div class="music-controls">
                             <div class="progress-bar">
                                 <input
+                                    #progressInput
                                     type="range"
                                     class="progress-input"
                                     [value]="audio.currentTime"
@@ -72,6 +73,329 @@
                         <ul class="track-list">
                             <li
                                 *ngFor="let track of momentosTracks; let i = index"
+                                class="track"
+                                (click)="playTrack(track)"
+                                [ngClass]="{'active': selectedTrack === track}"
+                            >
+                                <span class="track-number">{{ i + 1 }}</span>
+                                <div class="track-info">
+                                    <p class="track-title">{{ track.title }}</p>
+                                </div>
+                                <span class="track-duration">{{ track.duration || 'Loading...' }}</span>
+                                <span 
+                                    class="download"
+                                    (click)="downloadTrack(track)"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    data-bs-title="Descargar la canción"
+                                >
+                                    <i class="fa-solid fa-download"></i>
+                                </span>
+
+                                <!-- Dynamic container to show the track lyrics -->
+                                <div *ngIf="selectedTrack === track" class="lyrics-container">
+                                    <p class="lyrics">{{ track.lyrics }}</p>
+                                </div>
+                                
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5 d-flex justify-content-center">
+        <div class="separador"></div>
+    </div>
+
+    <!-- Vivir -->
+    <div class="row mt-5">
+        <div class="col-12 col-md-6">
+            <h2 class="heading">
+                Vivir
+            </h2>
+            <p class="text">
+                Este, mi segundo disco, lanzado en 2017, se distingue del primero por incluir varias 
+                composiciones instrumentales creadas entre 1987 y 1988, durante mi tiempo como 
+                estudiante de música, piano y composición en la Facultad de Música de la Universidad 
+                de Duke, en Durham, Carolina del Norte. Además, el álbum incorpora piezas compuestas 
+                en la década de los años 90. <br><br>
+
+                Es interesante notar que, en los casi 13 años posteriores al año 2000, mientras 
+                trabajaba para Oracle, una destacada compañía de tecnología, no hubo mucho espacio 
+                para la música. Esto parece confirmar la idea de que las musas necesitan un ambiente 
+                propicio para manifestarse.
+            </p>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="music-player-container">
+
+                <!-- Heading, about the disk and Player Controls -->
+                <div class="container-header">
+                    <div class="col-3">
+                        <img
+                            src="assets/music/vivir/Cover.jpg"
+                            alt="Vivir Cover"
+                            class="album-cover"
+                        />
+                    </div>
+                    <div class="col-9 pe-4">
+                        <div class="album-info">
+                            <h2 class="album-title">Vivir</h2>
+                            <p class="artist-name">German Arciniegas</p>
+                        </div>
+
+                        <!-- Player Controls -->
+                        <div class="music-controls">
+                            <div class="progress-bar">
+                                <input
+                                    #progressInput
+                                    type="range"
+                                    class="progress-input"
+                                    [value]="audio.currentTime"
+                                    [max]="audio.duration"
+                                    (input)="updateCurrentTime($event)"
+                                />
+                            </div>
+                            <div class="play-controls">
+                                <span class="current-time">{{ currentTime }}</span>
+                                <button class="play-btn">
+                                    <i
+                                        class="main-button fa-solid"
+                                        [ngClass]="this.playing ? 'fa-pause' : 'fa-play'"
+                                        (click)="togglePlayPause()"    
+                                    ></i>
+                                </button>
+                                <span class="total-time">{{ this.selectedTrack.duration }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Songs List -->
+                <div
+                    class="container-track-list p-2"
+                    [ngClass]="{ 'expanded': expandContainer }"
+                >
+                    <div class="scrollable-content">
+                        <ul class="track-list">
+                            <li
+                                *ngFor="let track of vivirTracks; let i = index"
+                                class="track"
+                                (click)="playTrack(track)"
+                                [ngClass]="{'active': selectedTrack === track}"
+                            >
+                                <span class="track-number">{{ i + 1 }}</span>
+                                <div class="track-info">
+                                    <p class="track-title">{{ track.title }}</p>
+                                </div>
+                                <span class="track-duration">{{ track.duration || 'Loading...' }}</span>
+                                <span 
+                                    class="download"
+                                    (click)="downloadTrack(track)"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    data-bs-title="Descargar la canción"
+                                >
+                                    <i class="fa-solid fa-download"></i>
+                                </span>
+
+                                <!-- Dynamic container to show the track lyrics -->
+                                <div *ngIf="selectedTrack === track" class="lyrics-container">
+                                    <p class="lyrics">{{ track.lyrics }}</p>
+                                </div>
+                                
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5 d-flex justify-content-center">
+        <div class="separador"></div>
+    </div>
+
+    <!-- Of Life and Love -->
+    <div class="row mt-5">
+        <div class="col-12 col-md-6">
+            <h2 class="heading">
+                Of Life and Love
+            </h2>
+            <p class="text">
+                Es un álbum especial para mí. Está completamente en inglés y, a diferencia de otros 
+                proyectos míos, no incluye pistas instrumentales. Este disco representa un corto 
+                período de mi vida, entre 2017 y 2020, cuando estaba profundamente involucrado en la 
+                música: componiendo, cantando y presentándome en vivo. Durante esos años, me uní a 
+                Angela Taylor para formar un dúo llamado The Power of Two, y juntos llevamos muchas 
+                de estas canciones al escenario. Como su título lo sugiere, el álbum gira en torno a 
+                los temas del amor y la vida. Cada tema lleva consigo una parte mía, reflejando las 
+                emociones e historias que quería compartir durante esos años creativos.
+            </p>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="music-player-container">
+
+                <!-- Heading, about the disk and Player Controls -->
+                <div class="container-header">
+                    <div class="col-3">
+                        <img
+                            src="assets/music/olal/Cover.jpg"
+                            alt="Of Life and Love Cover"
+                            class="album-cover"
+                        />
+                    </div>
+                    <div class="col-9 pe-4">
+                        <div class="album-info">
+                            <h2 class="album-title">Of Life and Love</h2>
+                            <p class="artist-name">German Arciniegas</p>
+                        </div>
+
+                        <!-- Player Controls -->
+                        <div class="music-controls">
+                            <div class="progress-bar">
+                                <input
+                                    #progressInput
+                                    type="range"
+                                    class="progress-input"
+                                    [value]="audio.currentTime"
+                                    [max]="audio.duration"
+                                    (input)="updateCurrentTime($event)"
+                                />
+                            </div>
+                            <div class="play-controls">
+                                <span class="current-time">{{ currentTime }}</span>
+                                <button class="play-btn">
+                                    <i
+                                        class="main-button fa-solid"
+                                        [ngClass]="this.playing ? 'fa-pause' : 'fa-play'"
+                                        (click)="togglePlayPause()"    
+                                    ></i>
+                                </button>
+                                <span class="total-time">{{ this.selectedTrack.duration }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Songs List -->
+                <div
+                    class="container-track-list p-2"
+                    [ngClass]="{ 'expanded': expandContainer }"
+                >
+                    <div class="scrollable-content">
+                        <ul class="track-list">
+                            <li
+                                *ngFor="let track of olalTracks; let i = index"
+                                class="track"
+                                (click)="playTrack(track)"
+                                [ngClass]="{'active': selectedTrack === track}"
+                            >
+                                <span class="track-number">{{ i + 1 }}</span>
+                                <div class="track-info">
+                                    <p class="track-title">{{ track.title }}</p>
+                                </div>
+                                <span class="track-duration">{{ track.duration || 'Loading...' }}</span>
+                                <span 
+                                    class="download"
+                                    (click)="downloadTrack(track)"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    data-bs-title="Descargar la canción"
+                                >
+                                    <i class="fa-solid fa-download"></i>
+                                </span>
+
+                                <!-- Dynamic container to show the track lyrics -->
+                                <div *ngIf="selectedTrack === track" class="lyrics-container">
+                                    <p class="lyrics">{{ track.lyrics }}</p>
+                                </div>
+                                
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5 d-flex justify-content-center">
+        <div class="separador"></div>
+    </div>
+
+    <!-- Dejame -->
+    <div class="row mt-5">
+        <div class="col-12 col-md-6">
+            <h2 class="heading">
+                Déjame
+            </h2>
+            <p class="text">
+                Este es un álbum sencillo, es decir que solo incluye una canción. En mi intento de 
+                explorar distintos géneros musicales, puedo decir que esta es la primera canción en 
+                forma de bolero que he escrito. El bolero, originario de Cuba a finales del siglo 
+                XIX, es uno de los géneros de música romántica más populares de América Latina, 
+                caracterizado por sus temas de amor y desamor, así como por su ritmo lento y 
+                melancólico. Crecí escuchando boleros en las voces de mi mamá, mis hermanos y mis 
+                tíos Price, quienes armonizaban en varias voces durante las inolvidables veladas 
+                musicales en casa.
+            </p>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="music-player-container">
+
+                <!-- Heading, about the disk and Player Controls -->
+                <div class="container-header">
+                    <div class="col-3">
+                        <img
+                            src="assets/music/dejame/Cover.jpeg"
+                            alt="Momentos Cover"
+                            class="album-cover"
+                        />
+                    </div>
+                    <div class="col-9 pe-4">
+                        <div class="album-info">
+                            <h2 class="album-title">Déjame</h2>
+                            <p class="artist-name">German Arciniegas</p>
+                        </div>
+
+                        <!-- Player Controls -->
+                        <div class="music-controls">
+                            <div class="progress-bar">
+                                <input
+                                    #progressInput
+                                    type="range"
+                                    class="progress-input"
+                                    [value]="audio.currentTime"
+                                    [max]="audio.duration"
+                                    (input)="updateCurrentTime($event)"
+                                />
+                            </div>
+                            <div class="play-controls">
+                                <span class="current-time">{{ currentTime }}</span>
+                                <button class="play-btn">
+                                    <i
+                                        class="main-button fa-solid"
+                                        [ngClass]="this.playing ? 'fa-pause' : 'fa-play'"
+                                        (click)="togglePlayPause()"    
+                                    ></i>
+                                </button>
+                                <span class="total-time">{{ this.selectedTrack.duration }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Songs List -->
+                <div
+                    class="container-track-list dejame p-2"
+                    [ngClass]="{ 'expanded': expandContainer }"
+                >
+                    <div class="scrollable-content">
+                        <ul class="track-list">
+                            <li
+                                *ngFor="let track of dejameTrack; let i = index"
                                 class="track"
                                 (click)="playTrack(track)"
                                 [ngClass]="{'active': selectedTrack === track}"

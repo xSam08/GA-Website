@@ -2,6 +2,15 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component } from '@angular/core';
 
+// Interface to define the Track object
+interface Track {
+  title: string;
+  file: string;
+  duration: string;
+  lyrics: string;
+  album: string;
+}
+
 @Component({
   selector: 'app-music',
   standalone: true,
@@ -14,32 +23,77 @@ import { AfterViewInit, Component } from '@angular/core';
 export class MusicComponent implements AfterViewInit {
 
   private basePath = 'assets/music/';
-  public audio: any; // Global audio player
-  public selectedTrack = { title: '', file: '', duration: 'Escoge una Canción', lyrics: '' }; // Track selected by the user
+  public audio: HTMLAudioElement = new Audio(); // Global audio player
+  public selectedTrack: Track = {
+    title: '',
+    file: '',
+    duration: 'Escoge una Canción',
+    lyrics: '',
+    album: ''
+  };
   public currentTime = '0:00';
   public totalTime = '0:00';
   public playing = false;
   public expandContainer = false;
 
-  momentosTracks: any[] = [
-    { title: 'Momentos', file: 'Momentos.mp3', duration: '', lyrics: 'Letra de Momentos...' },
-    { title: 'Tú', file: 'Tu.mp3', duration: '', lyrics: '' },
-    { title: 'Cómo decirte “te quiero“', file: 'ComoDecirteTeQuiero.mp3', duration: '', lyrics: '' },
-    { title: '¿Cuándo te voy a encontrar?', file: 'CuandoTeVoyAEncontrar.mp3', duration: '', lyrics: '' },
-    { title: 'Yo canto para ti', file: 'YoCantoParaTi.mp3', duration: '', lyrics: '' },
-    { title: 'Inspiración', file: 'Inspiracion.mp3', duration: '', lyrics: '' },
-    { title: 'Vida, ¿Qué nos pasa?', file: 'VidaQueNosPasa.mp3', duration: '', lyrics: '' },
-    { title: 'Ser feliz', file: 'SerFeliz.mp3', duration: '', lyrics: '' },
-    { title: 'Tu camino', file: 'TuCamino.mp3', duration: '', lyrics: '' },
-    { title: 'Aún recuerdo a mi tierra', file: 'AunRecuerdoAMiTierra.mp3', duration: '', lyrics: '' },
-    { title: 'Eres mi música', file: 'EresMiMusica.mp3', duration: '', lyrics: '' },
-    { title: 'Beatriz', file: 'Beatriz.mp3', duration: '', lyrics: '' }
+  momentosTracks: Track[] = [
+    { title: 'Momentos', file: 'Momentos.mp3', duration: '', lyrics: '', album: "momentos" },
+    { title: 'Tú', file: 'Tu.mp3', duration: '', lyrics: '', album: "momentos" },
+    { title: 'Cómo decirte “te quiero“', file: 'ComoDecirteTeQuiero.mp3', duration: '', lyrics: '', album: "momentos" },
+    { title: '¿Cuándo te voy a encontrar?', file: 'CuandoTeVoyAEncontrar.mp3', duration: '', lyrics: '', album: "momentos" },
+    { title: 'Yo canto para ti', file: 'YoCantoParaTi.mp3', duration: '', lyrics: '', album: "momentos" },
+    { title: 'Inspiración', file: 'Inspiracion.mp3', duration: '', lyrics: '', album: "momentos" },
+    { title: 'Vida, ¿Qué nos pasa?', file: 'VidaQueNosPasa.mp3', duration: '', lyrics: '', album: "momentos" },
+    { title: 'Ser feliz', file: 'SerFeliz.mp3', duration: '', lyrics: '', album: "momentos" },
+    { title: 'Tu camino', file: 'TuCamino.mp3', duration: '', lyrics: '', album: "momentos" },
+    { title: 'Aún recuerdo a mi tierra', file: 'AunRecuerdoAMiTierra.mp3', duration: '', lyrics: '', album: "momentos" },
+    { title: 'Eres mi música', file: 'EresMiMusica.mp3', duration: '', lyrics: '', album: "momentos" },
+    { title: 'Beatriz', file: 'Beatriz.mp3', duration: '', lyrics: '', album: "momentos" }
   ];
 
-  constructor(private http: HttpClient) {}
+  vivirTracks: Track[] = [
+    { title: 'Mi Vida', file: 'MiVida.mp3', duration: '', lyrics: '', album: "vivir" },
+    { title: 'Hace tiempo ya', file: 'HaceTiempoYa.mp3', duration: '', lyrics: '', album: "vivir" },
+    { title: 'Cuando pienso en ti', file: 'CuandoPiensoEnTi.mp3', duration: '', lyrics: '', album: "vivir" },
+    { title: 'Emilia', file: 'Emilia.mp3', duration: '', lyrics: '', album: "vivir" },
+    { title: 'Vivir', file: 'Vivir.mp3', duration: '', lyrics: '', album: "vivir" },
+    { title: 'De tiempos idos', file: 'DeTiemposIdos.mp3', duration: '', lyrics: '', album: "vivir" },
+    { title: 'Las Cosas que son', file: 'LasCosasQueSon.mp3', duration: '', lyrics: '', album: "vivir" },
+    { title: 'Primavera', file: 'Primavera.mp3', duration: '', lyrics: '', album: "vivir" },
+    { title: 'Cerca de Piedra', file: 'CercaDePiedra.mp3', duration: '', lyrics: '', album: "vivir" },
+    { title: 'Amistad', file: 'Amistad.mp3', duration: '', lyrics: '', album: "vivir" },
+    { title: 'Questionable Questions', file: 'QuestionableQuestions.mp3', duration: '', lyrics: '', album: "vivir" },
+    { title: 'Eres mi Imaginación', file: 'EresMiImaginacion.mp3', duration: '', lyrics: '', album: "vivir" },
+    { title: 'Fábula', file: 'Fabula.mp3', duration: '', lyrics: '', album: "vivir" },
+    { title: 'Verdades Sencillas', file: 'VerdadesSencillas.mp3', duration: '', lyrics: '', album: "vivir" },
+    { title: 'Sueño Español', file: 'SuenoEspanol.mp3', duration: '', lyrics: '', album: "vivir" },
+    { title: 'Variaciones', file: 'Variaciones.mp3', duration: '', lyrics: '', album: "vivir" },
+    { title: 'Los Dos Lados de la Luna', file: 'LosDosLadosDeLaLuna.mp3', duration: '', lyrics: '', album: "vivir" }
+  ];
+
+  olalTracks: Track[] = [
+    { title: 'What is Love?', file: 'WhatIsLove.mp3', duration: '', lyrics: '', album: "olal" },
+    { title: 'My Love will always find You', file: 'MyLoveWillAlwaysFindYou.mp3', duration: '', lyrics: '', album: "olal" },
+    { title: 'To find the Light', file: 'ToFindTheLight.mp3', duration: '', lyrics: '', album: "olal" },
+    { title: 'Is Love worth waiting for?', file: 'IsLoveWorthWaitingFor.mp3', duration: '', lyrics: '', album: "olal" },
+    { title: 'Endless Romance', file: 'EndlessRomance.mp3', duration: '', lyrics: '', album: "olal" },
+    { title: 'If I look back', file: 'IfILookBack.mp3', duration: '', lyrics: '', album: "olal" },
+    { title: 'This Road', file: 'ThisRoad.mp3', duration: '', lyrics: '', album: "olal" },
+    { title: 'Advice on Love', file: 'AdviceOnLove.mp3', duration: '', lyrics: '', album: "olal" },
+    { title: 'Lines in my Hand', file: 'LinesInMyHand.mp3', duration: '', lyrics: '', album: "olal" },
+    { title: 'What do You do?', file: 'WhatDoYouDo.mp3', duration: '', lyrics: '', album: "olal" },
+    { title: 'What a Life that would be', file: 'WhatALifeThatWouldBe.mp3', duration: '', lyrics: '', album: "olal" },
+    { title: 'The World is going Mad', file: 'TheWorldIsGoingMad.mp3', duration: '', lyrics: '', album: "olal" }
+  ];
+
+  dejameTrack: Track[] = [
+    { title: 'Déjame', file: 'Dejame.mp3', duration: '', lyrics: '', album: "dejame" }
+  ];
+
+  constructor(private http: HttpClient) {
+  }
 
   ngOnInit(): void {
-    this.audio = new Audio();  
     this.loadSongDurations();
     this.loadLyrics();
 
@@ -65,6 +119,13 @@ export class MusicComponent implements AfterViewInit {
     this.loadTooltips();
   }
 
+  ngOnDestroy(): void {
+    this.togglePlayPause();
+  }
+
+  /**
+   * Function to load the tooltips for the audio player controls.
+   */
   loadTooltips(): void {
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
     const tooltipList = Array.from(tooltipTriggerList).map(tooltipTriggerEl => 
@@ -73,66 +134,85 @@ export class MusicComponent implements AfterViewInit {
   }
 
   /**
-   * Function to load the duration of each song in the audio player
+   * Function to load the duration of all songs.
    */
   loadSongDurations(): void {
-    this.momentosTracks.forEach(song => {
-      const audio = new Audio(`${this.basePath}momentos/tracks/${song.file}`);
+    this.loadTrackDurations(this.momentosTracks, 'momentos');
+    this.loadTrackDurations(this.vivirTracks, 'vivir');
+    this.loadTrackDurations(this.olalTracks, 'olal');
+    this.loadTrackDurations(this.dejameTrack, 'dejame');
+  }
+
+  /**
+   * Generic function to load the duration of songs for a given track list and folder.
+   */
+  loadTrackDurations(trackList: any[], folder: string): void {
+    trackList.forEach(song => {
+      const audio = new Audio(`${this.basePath}${folder}/tracks/${song.file}`);
       audio.addEventListener('loadedmetadata', () => {
-        const minutes = Math.floor(audio.duration / 60);
-        const seconds = Math.floor(audio.duration % 60).toString().padStart(2, '0');
-        song.duration = `${minutes}:${seconds}`;
+        song.duration = this.formatTime(audio.duration);
       });
     });
   }
 
   /**
-   * Function to load the lyrics of each song in the audio player
+   * Function to load the lyrics of all songs.
    */
   loadLyrics(): void {
-    const lyricsPromises = this.momentosTracks.map(track => 
-      this.http.get(`assets/music/momentos/lyrics/${track.file.replace('.mp3', 'Lyrics.txt')}`, 
-      { responseType: 'text' }).toPromise()
-        .then(lyrics => {
-          track.lyrics = lyrics;
-        })
-        .catch(() => {
-          track.lyrics = 'Lyrics not found';
-        })
-    );
-
-    Promise.all(lyricsPromises).then(() => {
-      console.log('All lyrics loaded!');
+    Promise.all([
+      this.loadTrackLyrics(this.momentosTracks, 'momentos'),
+      this.loadTrackLyrics(this.vivirTracks, 'vivir'),
+      this.loadTrackLyrics(this.olalTracks, 'olal'),
+      this.loadTrackLyrics(this.dejameTrack, 'dejame')
+    ]).then(() => {
+      console.log('All Lyrics loaded!');
     });
   }
 
   /**
-   * Function to play a track in the audio player
+   * Generic function to load the lyrics of songs for a given track list and folder.
+   */
+  loadTrackLyrics(trackList: any[], folder: string): Promise<void[]> {
+    return Promise.all(
+      trackList.map(track =>
+        this.http.get(`assets/music/${folder}/lyrics/${track.file.replace('.mp3', 'Lyrics.txt')}`, 
+          { responseType: 'text' })
+          .toPromise()
+          .then(lyrics => {
+            track.lyrics = lyrics;
+          })
+          .catch(() => {
+            track.lyrics = 'Lyrics not found';
+          })
+      )
+    );
+  }
+
+  /**
+   * Function to play a track
    * @param track - Track to play
-   * @returns void
    */
   playTrack(track: any): void {
+    // Check if the selected track is the same as the one playing
     if (this.selectedTrack === track) {
       this.audio.pause();
-      this.selectedTrack = { title: '', file: '', duration: 'Escoge una Canción', lyrics: '' };
+      this.selectedTrack = { title: '', file: '', duration: 'Escoge una Canción', lyrics: '', album: '' };
       this.audio.src = '';
       this.playing = false;
       this.expandContainer = false;
     } else {
       // Play the selected track
       this.selectedTrack = track;
-      this.audio.src = `${this.basePath}momentos/tracks/${track.file}`;
+      this.audio.src = `${this.basePath}${this.selectedTrack.album}/tracks/${track.file}`;
       this.audio.load();
       this.audio.play();
       this.playing = true;
       this.expandContainer = true;
-      console.log(this.selectedTrack);
     }
   }
 
   /**
-   * Function to play or pause the audio player
-   * @returns void
+   * Function to toggle the play/pause of the audio player
    */
   togglePlayPause(): void {
     if (this.playing) {
@@ -144,6 +224,10 @@ export class MusicComponent implements AfterViewInit {
     }
   }
 
+  /**
+   * Function to update the current time of the audio player
+   * @param event - Event to update the current time
+   */
   updateCurrentTime(event: Event): void {
     const input = event.target as HTMLInputElement;
     this.audio.currentTime = parseFloat(input.value);
@@ -156,6 +240,9 @@ export class MusicComponent implements AfterViewInit {
    * @returns string - Time formatted
    */
   formatTime(time: number): string {
+    if (isNaN(time) || !isFinite(time)) {
+    return '0:00';
+  }
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60).toString().padStart(2, '0');
     return `${minutes}:${seconds}`;
@@ -165,10 +252,12 @@ export class MusicComponent implements AfterViewInit {
    * Function to download a track
    * @param track - Track to download
    */
-  downloadTrack(track: any): void {
+  downloadTrack(track: Track): void {
     const link = document.createElement('a');
-    link.href = `${this.basePath}momentos/tracks/${track.file}`;
+    link.href = `${this.basePath}${track.album}/tracks/${track.file}`;
     link.download = track.file;
+    document.body.appendChild(link);
     link.click();
+    document.body.removeChild(link);
   }
 }
