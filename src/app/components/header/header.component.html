@@ -21,23 +21,24 @@
                     CONTACTO
                 </a>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown" (click)="toggleDropdown()">
                 <a class="nav-link dropdown-toggle">
                     <img src="{{ this.lang === 'en' ? '/assets/us.jpeg' : '/assets/co.png' }}" 
                         width="30px"
                         height="15px"
                         alt="Español"
-                    > {{ this.lang === 'en' ? 'ENGLISH' : 'ESPAÑOL' }}
+                        class="lang-img"
+                    > {{ this.lang === 'en' ? 'EN' : 'ES' }}
                 </a>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu" [style.display]="isDropdownVisible ? 'block' : 'none'">
                     <li>
-                        <a class="dropdown-item" (click)="changeLang()">
+                        <a class="dropdown-item" (click)="changeLang($event)">
                             <img src="{{ this.lang === 'en' ? '/assets/co.png' : '/assets/us.jpeg' }}"
                                 width="30px"
                                 height="15px"
                                 alt="English"
                                 onclick="changeLanguage()"
-                            > {{ this.lang === 'en' ? 'ESPAÑOL' : 'ENGLISH' }}
+                            > {{ this.lang === 'en' ? 'ES' : 'EN' }}
                         </a>
                     </li>
                 </ul>
