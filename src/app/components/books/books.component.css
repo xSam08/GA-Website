@@ -6,16 +6,17 @@
     color: white;
     text-align: justify;
     font-size: 1.1rem;
+    line-height: 1.3;
 }
 
 .image {
     width: 65%;
-    height: 400px;
+    height: 450px;
 }
 
 .image2 {
     width: 65%;
-    height: 450px;
+    height: 500px;
 }
 
 .dropdown-menu {
@@ -47,4 +48,16 @@
 .separador {
     border-top: 2px solid var(--golden);
     width: 100px;
+}
+
+@media (max-width: 500px) {
+    .image {
+        width: 66%;
+        height: 100%;
+    }
+
+    .image2 {
+        width: 66%;
+        height: 100%;
+    }
 }

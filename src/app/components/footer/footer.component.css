@@ -3,7 +3,8 @@
 }
 
 .copyright {
-    color: white;
+    color: rgb(192, 192, 192);
+    font-size: 0.9rem;
 }
 
 ul {
@@ -49,12 +50,12 @@ li {
 
 a {
     text-decoration: underline;
-    color: var(--golden);
+    color: var(--darkGolden);
     font-weight: 600;
 }
 
 .fa-github {
-    color: white !important;
-    font-size: 1.1rem;
+    color: rgb(192, 192, 192) !important;
+    font-size: 0.9rem;
     margin-left: 3px;
 }
