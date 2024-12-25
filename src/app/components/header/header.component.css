@@ -36,6 +36,9 @@ ul {
 }
 
 .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    z-index: 1000;
     background-color: #131313 !important;
     border: 1px solid #101010 !important;
     border-radius: 5px;
