@@ -19,7 +19,8 @@ This project was created with **Angular 19** and uses several modern web technol
 - **Bootstrap** for responsive layout
 - **FontAwesome** for icons
 - **Google Fonts** for custom typography
-- **Pending...** for email sending
+- **EmailJS** for email sending
+- **reCAPTCHA v2** to prevent bots and spam
 
 ## Developer
 
