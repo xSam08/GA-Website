@@ -6,12 +6,24 @@ import { provideClientHydration, withEventReplay } from '@angular/platform-brows
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 
+// Import environment
+import { environment } from '../environments/environment';
+
+// Import recaptcha settings
+import { RECAPTCHA_SETTINGS, RecaptchaSettings } from 'ng-recaptcha';
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch()),
-    provideAnimations()
+    provideAnimations(),
+    {
+      provide: RECAPTCHA_SETTINGS,
+      useValue: {
+        siteKey: environment.recaptcha.siteKey,
+      } as RecaptchaSettings,
+    }
   ]
 };
