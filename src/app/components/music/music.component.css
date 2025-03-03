@@ -9,7 +9,7 @@
 
 .text {
     color: #EFEFEF;
-    line-height: normal;
+    line-height: 1.3rem;
     text-align: justify;
     font-size: 1.1rem;
 }
@@ -222,4 +222,48 @@ p {
 .separador {
     border-top: 2px solid var(--golden);
     width: 100px;
+}
+
+.copyright {
+    color: rgb(128, 128, 128);
+    font-size: 0.8rem;
+}
+
+.sign {
+    font-size: 1rem;
+}
+
+.fa-brands {
+    font-size: 1.3rem;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.fa-brands:hover {
+    transform: scale(1.2);
+}
+
+.fa-spotify {
+    color: #1DB954;
+}
+
+.fa-youtube {
+    color: #FF0000;
+}
+
+.fa-deezer {
+    color: #a138fe;
+}
+
+.fa-bandcamp {
+    color: #629aa9;
+}
+
+.fa-amazon {
+    color: #a8a8a8;
+}
+
+.fa-apple {
+    color: #707070;
+    font-size: 1.4rem;
 }
