@@ -175,7 +175,7 @@ export class MusicComponent implements AfterViewInit {
   loadTrackLyrics(trackList: any[], folder: string): Promise<void[]> {
     return Promise.all(
       trackList.map(track =>
-        this.http.get(`assets/music/${folder}/lyrics/${track.file.replace('.mp3', 'Lyrics.txt')}`, 
+        this.http.get(`${this.basePath}${folder}/lyrics/${track.file.replace('.mp3', 'Lyrics.txt')}`, 
           { responseType: 'text' })
           .toPromise()
           .then(lyrics => {

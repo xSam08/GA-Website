@@ -12,6 +12,9 @@ import { environment } from '../environments/environment';
 // Import recaptcha settings
 import { RECAPTCHA_SETTINGS, RecaptchaSettings } from 'ng-recaptcha';
 
+// Import toastr
+import { provideToastr } from 'ngx-toastr';
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
@@ -19,6 +22,12 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch()),
     provideAnimations(),
+    provideToastr({
+      positionClass: 'toast-bottom-right',
+      timeOut: 10000,
+      closeButton: true,
+      progressBar: true,
+    }),
     {
       provide: RECAPTCHA_SETTINGS,
       useValue: {

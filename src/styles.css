@@ -1,3 +1,5 @@
+@import 'ngx-toastr/toastr';
+
 :root {
     --golden: #E4CB86;
     --darkGolden: #a8895a;
@@ -11,7 +13,8 @@ body {
     font-family: 'Montserrat';
 }
 
-html, body {
+html,
+body {
     height: 100%;
     margin: 0;
     display: flex;
