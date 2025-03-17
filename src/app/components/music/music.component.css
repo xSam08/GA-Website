@@ -10,8 +10,8 @@
 .text {
     color: #EFEFEF;
     line-height: 1.3rem;
-    text-align: justify;
-    font-size: 1.1rem;
+    font-size: 1rem;
+    hyphens: auto;
 }
 
 .container-header {
@@ -129,7 +129,10 @@
 
 .track {
     display: flex;
+    align-items: flex-start;
     justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: 10px;
     padding: 7px 10px;
     border-radius: 5px;
     cursor: pointer;
@@ -160,15 +163,19 @@
 }
 
 .track-info {
-    flex-grow: 1;
+    flex: 1;
+    overflow: hidden;
     margin-left: 10px;
+    white-space: normal;
+    word-wrap: break-word;
 }
 
 .track-title {
-    display: flex;
-    align-items: center;
     font-weight: 500;
     font-size: 0.9rem;
+    max-width: 100%;
+    line-height: 1.2;
+    display: block;
 }
 
 .track-artist {
@@ -185,6 +192,7 @@
     font-weight: 600;
     margin-right: 10px;
     font-size: 0.9rem;
+    flex-shrink: 0;
 }
 
 .lyrics-container {
@@ -217,6 +225,7 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 }
 
 .separador {
