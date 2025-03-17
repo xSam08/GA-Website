@@ -7,7 +7,7 @@ interface Track {
   title: string;
   file: string;
   duration: string;
-  lyrics: string;
+  lyrics?: string;
   album: string;
 }
 
@@ -35,6 +35,10 @@ export class MusicComponent implements AfterViewInit {
   public totalTime = '0:00';
   public playing = false;
   public expandContainer = false;
+  public expandContainerMomentos = false;
+  public expandContainerVivir = false;
+  public expandContainerOlal = false;
+  public expandContainerDejame = false;
 
   momentosTracks: Track[] = [
     { title: 'Momentos', file: 'Momentos.mp3', duration: '', lyrics: '', album: "momentos" },
@@ -90,6 +94,74 @@ export class MusicComponent implements AfterViewInit {
     { title: 'Déjame', file: 'Dejame.mp3', duration: '', lyrics: '', album: "dejame" }
   ];
 
+  po2duetoTrack: Track[] = [
+    { title: 'You are the sunshine of my life', file: 'YouAreTheSunshineOfMyLife.mp3', duration: '', album: "po2-d" },
+    { title: 'Besame mucho', file: 'BesameMucho.mp3', duration: '', album: "po2-d" },
+    { title: 'Fly me to the moon', file: 'FlyMeToTheMoon.mp3', duration: '', album: "po2-d" },
+    { title: 'Over the rainbow', file: 'OverTheRainbow.mp3', duration: '', album: "po2-d" },
+    { title: 'Cant but me love', file: 'CantBuyMeLove.mp3', duration: '', album: "po2-d" },
+    { title: 'Scarborough fair', file: 'ScarboroughFair.mp3', duration: '', album: "po2-d" },
+    { title: 'Something in the way', file: 'SomethingInTheWay.mp3', duration: '', album: "po2-d" },
+    { title: 'Wiskey Lulaby', file: 'WiskeyLulaby.mp3', duration: '', album: "po2-d" },
+    { title: 'Edelwais', file: 'Edelwais.mp3', duration: '', album: "po2-d" },
+    { title: 'Strangers in the Night', file: 'StrangersInTheNight.mp3', duration: '', album: "po2-d" },
+    { title: 'What a wonderful world', file: 'WhatAWonderfulWorld.mp3', duration: '', album: "po2-d" },
+    { title: 'Ill fly away', file: 'IllFlyAway.mp3', duration: '', album: "po2-d" },
+    { title: 'Danny boy', file: 'DannyBoy.mp3', duration: '', album: "po2-d" },
+    { title: 'Yesterday', file: 'Yesterday.mp3', duration: '', album: "po2-d" },
+    { title: 'Cant take my eyes of you', file: 'CantTakeMyEyesOfYou.mp3', duration: '', album: "po2-d" },
+    { title: 'Aint no sunshine', file: 'AintNoSunshine.mp3', duration: '', album: "po2-d" },
+    { title: 'Something Stupid', file: 'SomethingStupid.mp3', duration: '', album: "po2-d" },
+    { title: 'Sounds of silence', file: 'SoundsOfSilence.mp3', duration: '', album: "po2-d" },
+    { title: 'Dream a little dream of me', file: 'DreamALittleDreamOfMe.mp3', duration: '', album: "po2-d" },
+    { title: 'Sway', file: 'Sway.mp3', duration: '', album: "olal" },
+  ];
+
+  otherTrack: Track[] = [
+    { title: 'Primera cancion a Beatriz', file: 'PrimeraCancionABeatriz.mp3', duration: '', album: "other" },
+    { title: 'Segunda cancion a Beatriz', file: 'SegundaCancionABeatriz.mp3', duration: '', album: "other" },
+    { title: 'Tercera cancion a Beatriz', file: 'TerceraCancionABeatriz.mp3', duration: '', album: "other" },
+    { title: 'Cuarta cancion a Beatriz', file: 'CuartaCancionABeatriz.mp3', duration: '', album: "other" },
+    { title: 'Quinta cancion a Beatriz', file: 'QuintaCancionABeatriz.mp3', duration: '', album: "other" },
+    { title: 'Sexta cancion a Beatriz', file: 'SextaCancionABeatriz.mp3', duration: '', album: "other" },
+    { title: 'Septima cancion a Beatriz', file: 'SeptimaCancionABeatriz.mp3', duration: '', album: "other" },
+    { title: 'Octava cancion a Beatriz', file: 'OctavaCancionABeatriz.mp3', duration: '', album: "other" },
+    { title: 'Novena cancion a Beatriz', file: 'NovenaCancionABeatriz.mp3', duration: '', album: "other" },
+    { title: 'Decima cancion a Beatriz', file: 'DecimaCancionABeatriz.mp3', duration: '', album: "other" },
+    { title: 'Cuando vayas a mi pueblo', file: 'CuandoVayasAMiPueblo.mp3', duration: '', album: "other" },
+    { title: 'Que ha sido de tu vida', file: 'QueHaSidoDeTuVida.mp3', duration: '', album: "other" },
+    { title: 'Una carrera sin final', file: 'UnaCarreraSinFinal.mp3', duration: '', album: "other" },
+    { title: 'Enredado en tu recuerdo', file: 'EnredadoEnTuRecuerdo.mp3', duration: '', album: "other" },
+    { title: 'Conversando con la vida', file: 'ConversandoConLaVida.mp3', duration: '', album: "other" },
+    { title: 'Musico poeta', file: 'MusicoPoeta.mp3', duration: '', album: "other" },
+    { title: 'Dime papa Ana Maria', file: 'DimePapaAnaMaria.mp3', duration: '', album: "other" },
+    { title: 'Soy pirata', file: 'SoyPirata.mp3', duration: '', album: "other" },
+    { title: 'Un alto en el andar', file: 'UnAltoEnElAndar.mp3', duration: '', album: "other" },
+    { title: 'Daniela', file: 'Daniela.mp3', duration: '', album: "other" },
+    { title: 'Ser feliz', file: 'SerFeliz.mp3', duration: '', album: "other" },
+    { title: 'Colegio los Nogales', file: 'ColegioLosNogales.mp3', duration: '', album: "other" },
+    { title: 'Volver a Bayamo', file: 'VolverABayamo.mp3', duration: '', album: "other" },
+    { title: 'Años y años atras', file: 'YearsAndYearsBack.mp3', duration: '', album: "other" },
+    { title: 'Baila conmigo', file: 'BailaConmigo.mp3', duration: '', album: "other" },
+    { title: 'Todos uno con la tierra', file: 'TodosUnoConLaTierra.mp3', duration: '', album: "other" },
+    { title: 'Uno mas uno', file: 'UnoMasUno.mp3', duration: '', album: "other" },
+    { title: 'Se van', file: 'SeVan.mp3', duration: '', album: "other" },
+    { title: 'Toma mi mano Voice Ana Maria', file: 'TomaMiManoVoiceAMaria.mp3', duration: '', album: "other" },
+    { title: 'A million years ago', file: 'AMillionYearsAgo.mp3', duration: '', album: "other" },
+    { title: 'My friend this is heaven', file: 'MyFriendThisIsHeaven.mp3', duration: '', album: "other" },
+    { title: 'Tell me that you love me', file: 'TellMeThatYouLoveMe.mp3', duration: '', album: "other" },
+    { title: 'Look at her', file: 'LookAtHer.mp3', duration: '', album: "other" },
+    { title: 'Do we dare', file: 'DoWeDare.mp3', duration: '', album: "other" },
+    { title: 'This ones for you', file: 'ThisOnesForYou.mp3', duration: '', album: "other" },
+    { title: 'El arbol de la vida', file: 'ElArbolDeLaVida.mp3', duration: '', album: "other" },
+    { title: 'Un nuevo comenzar', file: 'UnNuevoComenzar.mp3', duration: '', album: "other" },
+    { title: 'En espera de palabras', file: 'EnEsperaDePalabras.mp3', duration: '', album: "other" },
+    { title: 'Huellas en la arena', file: 'HuellasEnLaArena.mp3', duration: '', album: "other" },
+    { title: 'Mariposa', file: 'Mariposa.mp3', duration: '', album: "other" },
+    { title: 'Shekina', file: 'Shekina.mp3', duration: '', album: "other" },
+    { title: 'Eternity', file: 'Eternity.mp3', duration: '', album: "other" }
+  ];
+
   constructor(private http: HttpClient) {
   }
 
@@ -141,6 +213,8 @@ export class MusicComponent implements AfterViewInit {
     this.loadTrackDurations(this.vivirTracks, 'vivir');
     this.loadTrackDurations(this.olalTracks, 'olal');
     this.loadTrackDurations(this.dejameTrack, 'dejame');
+    this.loadTrackDurations(this.po2duetoTrack, 'po2-d');
+    this.loadTrackDurations(this.otherTrack, 'other');
   }
 
   /**
@@ -192,23 +266,56 @@ export class MusicComponent implements AfterViewInit {
    * Function to play a track
    * @param track - Track to play
    */
-  playTrack(track: any): void {
-    // Check if the selected track is the same as the one playing
+  playTrack(track: any, container: string): void {
     if (this.selectedTrack === track) {
       this.audio.pause();
       this.selectedTrack = { title: '', file: '', duration: 'Escoge una Canción', lyrics: '', album: '' };
       this.audio.src = '';
       this.playing = false;
-      this.expandContainer = false;
+      this.restartExpandContainers();
     } else {
-      // Play the selected track
       this.selectedTrack = track;
       this.audio.src = `${this.basePath}${this.selectedTrack.album}/tracks/${track.file}`;
       this.audio.load();
       this.audio.play();
       this.playing = true;
-      this.expandContainer = true;
+      this.restartExpandContainers();
+      this.expandContainerToggle(container);
     }
+  }
+
+  /**
+   * Function to expand the container of a given track
+   * @param container - Container to expand
+   */
+  expandContainerToggle(container: string): void {
+    switch (container) {
+      case 'momentos':
+        this.expandContainerMomentos = !this.expandContainerMomentos;
+        break;
+      case 'vivir':
+        this.expandContainerVivir = !this.expandContainerVivir;
+        break;
+      case 'olal':
+        this.expandContainerOlal = !this.expandContainerOlal;
+        break;
+      case 'dejame':
+        this.expandContainerDejame = !this.expandContainerDejame;
+        break;
+      default:
+        break;
+    }
+  }
+
+  /**
+   * Function to restart the expand containers to false
+   * This is used to close all the containers when a new song is played in a different player
+   */
+  restartExpandContainers(): void {
+    this.expandContainerMomentos = false;
+    this.expandContainerVivir = false;
+    this.expandContainerOlal = false;
+    this.expandContainerDejame = false;
   }
 
   /**

@@ -122,14 +122,14 @@
                 <!-- Songs List -->
                 <div
                     class="container-track-list p-2"
-                    [ngClass]="{ 'expanded': expandContainer }"
+                    [ngClass]="{ 'expanded': expandContainerMomentos }"
                 >
                     <div class="scrollable-content">
                         <ul class="track-list">
                             <li
                                 *ngFor="let track of momentosTracks; let i = index"
                                 class="track"
-                                (click)="playTrack(track)"
+                                (click)="playTrack(track, 'momentos')"
                                 [ngClass]="{'active': selectedTrack === track}"
                             >
                                 <span class="track-number">{{ i + 1 }}</span>
@@ -295,14 +295,14 @@
                 <!-- Songs List -->
                 <div
                     class="container-track-list p-2"
-                    [ngClass]="{ 'expanded': expandContainer }"
+                    [ngClass]="{ 'expanded': expandContainerVivir }"
                 >
                     <div class="scrollable-content">
                         <ul class="track-list">
                             <li
                                 *ngFor="let track of vivirTracks; let i = index"
                                 class="track"
-                                (click)="playTrack(track)"
+                                (click)="playTrack(track, 'vivir')"
                                 [ngClass]="{'active': selectedTrack === track}"
                             >
                                 <span class="track-number">{{ i + 1 }}</span>
@@ -466,14 +466,14 @@
                 <!-- Songs List -->
                 <div
                     class="container-track-list p-2"
-                    [ngClass]="{ 'expanded': expandContainer }"
+                    [ngClass]="{ 'expanded': expandContainerOlal }"
                 >
                     <div class="scrollable-content">
                         <ul class="track-list">
                             <li
                                 *ngFor="let track of olalTracks; let i = index"
                                 class="track"
-                                (click)="playTrack(track)"
+                                (click)="playTrack(track, 'olal')"
                                 [ngClass]="{'active': selectedTrack === track}"
                             >
                                 <span class="track-number">{{ i + 1 }}</span>
@@ -637,14 +637,14 @@
                 <!-- Songs List -->
                 <div
                     class="container-track-list dejame p-2"
-                    [ngClass]="{ 'expanded': expandContainer }"
+                    [ngClass]="{ 'expanded': expandContainerDejame }"
                 >
                     <div class="scrollable-content">
                         <ul class="track-list">
                             <li
                                 *ngFor="let track of dejameTrack; let i = index"
                                 class="track"
-                                (click)="playTrack(track)"
+                                (click)="playTrack(track, 'dejame')"
                                 [ngClass]="{'active': selectedTrack === track}"
                             >
                                 <span class="track-number">{{ i + 1 }}</span>
@@ -667,6 +667,272 @@
                                     <p class="lyrics">{{ track.lyrics }}</p>
                                 </div>
                                 
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Copyright sign -->
+                <div class="col-12 mt-1">
+                    <p class="copyright">
+                        <span class="sign">
+                            ©
+                        </span> Copyright, todos los derechos reservados, German Arciniegas Price
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5 d-flex justify-content-center">
+        <div class="separador"></div>
+    </div>
+
+    <!-- Power of 2 - Duet -->
+    <div class="row mt-5">
+        <div class="col-12 col-md-6">
+            <h2 class="heading">
+                Power of 2 - Duet
+            </h2>
+            <p class="text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
+                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
+                occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <br><br>
+
+                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, 
+                eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam 
+                voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione 
+                voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci 
+                velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+            </p>
+            <div class="botones-externos mt-3">
+                <!-- External link to Spotify -->
+                <!-- <a href="https://open.spotify.com/intl-es/album/72rM2kgoypCPtdzcx48jp5?si=LgmvQhcPSvir-O4whP4rog"
+                   target="_blank">
+                    <i class="fa-brands fa-spotify"
+                       data-bs-toggle="tooltip"
+                       data-bs-placement="top"
+                       data-bs-title="Escuchar en Spotify"></i>
+                </a> -->
+
+                <!-- External link to Youtube Music -->
+                <!-- <a href="https://music.youtube.com/watch?v=2MVxUDCczdo&si=vmkWM4hk0Sd-kYQt"
+                   target="_blank">
+                    <i class="fa-brands fa-youtube"
+                       data-bs-toggle="tooltip"
+                       data-bs-placement="top"
+                       data-bs-title="Escuchar en Youtube Music"></i>
+                </a> -->
+
+                <!-- External link to Deezer -->
+                <!-- <a href="https://www.deezer.com/us/album/46398712"
+                   target="_blank">
+                    <i class="fa-brands fa-deezer"
+                       data-bs-toggle="tooltip"
+                       data-bs-placement="top"
+                       data-bs-title="Escuchar en Deezer"></i>
+                </a> -->
+
+                <!-- External link to Bandcamp -->
+                <!-- <a href="https://germanarciniegas.bandcamp.com/album/momentos"
+                   target="_blank">
+                    <i class="fa-brands fa-bandcamp"
+                       data-bs-toggle="tooltip"
+                       data-bs-placement="top"
+                       data-bs-title="Escuchar en Bandcamp"></i>
+                </a> -->
+
+                <!-- External link to Amazon Music -->
+                <!-- <a href="https://www.amazon.com/music/player/albums/B0BNSVDX6D"
+                   target="_blank">
+                    <i class="fa-brands fa-amazon"
+                       data-bs-toggle="tooltip"
+                       data-bs-placement="top"
+                       data-bs-title="Escuchar en Amazon Music"></i>
+                </a> -->
+
+                <!-- External link to Apple Music -->
+                <!-- <a href="https://music.apple.com/us/album/dejame-single/1657819432"
+                   target="_blank">
+                    <i class="fa-brands fa-apple"
+                       data-bs-toggle="tooltip"
+                       data-bs-placement="top"
+                       data-bs-title="Escuchar en Apple Music"></i>
+                </a> -->
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="music-player-container">
+
+                <!-- Heading, about the disk and Player Controls -->
+                <div class="container-header">
+                    <div class="col-3">
+                        <img
+                            src="assets/music/po2-d/Cover.png"
+                            alt="Momentos Cover"
+                            class="album-cover"
+                        />
+                    </div>
+                    <div class="col-9 pe-4">
+                        <div class="album-info">
+                            <h2 class="album-title">Power of 2 - Duet</h2>
+                            <p class="artist-name">German Arciniegas</p>
+                        </div>
+
+                        <!-- Player Controls -->
+                        <div class="music-controls">
+                            <div class="progress-bar">
+                                <input
+                                    #progressInput
+                                    type="range"
+                                    class="progress-input"
+                                    [value]="audio.currentTime"
+                                    [max]="audio.duration"
+                                    (input)="updateCurrentTime($event)"
+                                />
+                            </div>
+                            <div class="play-controls">
+                                <span class="current-time">{{ currentTime }}</span>
+                                <button class="play-btn">
+                                    <i
+                                        class="main-button fa-solid"
+                                        [ngClass]="this.playing ? 'fa-pause' : 'fa-play'"
+                                        (click)="togglePlayPause()"    
+                                    ></i>
+                                </button>
+                                <span class="total-time">{{ this.selectedTrack.duration }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Songs List -->
+                <div class="container-track-list p-2">
+                    <div class="scrollable-content">
+                        <ul class="track-list">
+                            <li
+                                *ngFor="let track of po2duetoTrack; let i = index"
+                                class="track"
+                                (click)="playTrack(track, 'po2-d')"
+                                [ngClass]="{'active': selectedTrack === track}"
+                            >
+                                <span class="track-number">{{ i + 1 }}</span>
+                                <div class="track-info">
+                                    <p class="track-title">{{ track.title }}</p>
+                                </div>
+                                <span class="track-duration">{{ track.duration || 'Loading...' }}</span>
+                                <span 
+                                    class="download"
+                                    (click)="downloadTrack(track)"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    data-bs-title="Descargar la canción"
+                                >
+                                    <i class="fa-solid fa-download"></i>
+                                </span>        
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Copyright sign -->
+                <div class="col-12 mt-1">
+                    <p class="copyright">
+                        <span class="sign">
+                            ©
+                        </span> Copyright, todos los derechos reservados, German Arciniegas Price
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5 d-flex justify-content-center">
+        <div class="separador"></div>
+    </div>
+
+    <!-- Other -->
+    <div class="row mt-5">
+        <div class="col-12 col-md-6">
+            <h2 class="heading">
+                Otras Canciones no incluidas en los Discos anteriores
+            </h2>
+            <p class="text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
+                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
+                occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <br><br>
+
+                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, 
+                eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam 
+                voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione 
+                voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci 
+                velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+            </p>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="music-player-container">
+
+                <!-- Heading, about the disk and Player Controls -->
+                <div class="container-header">
+                    <div class="col-12 ps-4 pe-4">
+                        <div class="album-info">
+                            <h2 class="album-title">Otras Canciones</h2>
+                            <p class="artist-name">German Arciniegas</p>
+                        </div>
+
+                        <!-- Player Controls -->
+                        <div class="music-controls">
+                            <div class="progress-bar">
+                                <input
+                                    #progressInput
+                                    type="range"
+                                    class="progress-input"
+                                    [value]="audio.currentTime"
+                                    [max]="audio.duration"
+                                    (input)="updateCurrentTime($event)"
+                                />
+                            </div>
+                            <div class="play-controls">
+                                <span class="current-time">{{ currentTime }}</span>
+                                <button class="play-btn">
+                                    <i
+                                        class="main-button fa-solid"
+                                        [ngClass]="this.playing ? 'fa-pause' : 'fa-play'"
+                                        (click)="togglePlayPause()"    
+                                    ></i>
+                                </button>
+                                <span class="total-time">{{ this.selectedTrack.duration }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Songs List -->
+                <div class="container-track-list p-2">
+                    <div class="scrollable-content">
+                        <ul class="track-list">
+                            <li
+                                *ngFor="let track of otherTrack; let i = index"
+                                class="track"
+                                (click)="playTrack(track, 'other')"
+                                [ngClass]="{'active': selectedTrack === track}"
+                            >
+                                <span class="track-number">{{ i + 1 }}</span>
+                                <div class="track-info">
+                                    <p class="track-title">{{ track.title }}</p>
+                                </div>
+                                <span class="track-duration">{{ track.duration || 'Loading...' }}</span>
+                                <span 
+                                    class="download"
+                                    (click)="downloadTrack(track)"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    data-bs-title="Descargar la canción"
+                                >
+                                    <i class="fa-solid fa-download"></i>
+                                </span>
                             </li>
                         </ul>
                     </div>
