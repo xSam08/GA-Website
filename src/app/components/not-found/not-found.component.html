@@ -1,5 +1,11 @@
 <div class="not-found-container">
-    <div class="error-code">404</div>
-    <div class="error-message">Oops! La página que estás buscando no existe.</div>
-    <a class="back-home-btn" routerLink="/home">Volver al Inicio</a>
+    <div class="error-code">
+        {{ "PAGE_NOT_FOUND" | translate }}
+    </div>
+    <div class="error-message">
+        {{ "PAGE_NOT_FOUND_DESC" | translate }}
+    </div>
+    <a class="back-home-btn" routerLink="/home">
+        {{ "PAGE_NOT_FOUND_BACK" | translate }}
+    </a>
 </div>

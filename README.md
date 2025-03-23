@@ -10,6 +10,7 @@ This project is dedicated to the life of **German Arciniegas Price**, my uncle. 
 - **Music**: Discography and songs of German.
 - **Books**: A list of his literary works.
 - **Contact**: A reactive form for users to get in touch.
+- **Translation flags**: A function to allow users to interact in their languages with the site.
 
 ## Technologies Used
 
@@ -21,6 +22,8 @@ This project was created with **Angular 19** and uses several modern web technol
 - **Google Fonts** for custom typography
 - **EmailJS** for email sending
 - **reCAPTCHA v2** to prevent bots and spam
+- **ngx-toastr** for message notifications
+- **ngx-translate** for translation purposes
 
 ## Developer
 

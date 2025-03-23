@@ -1,6 +1,10 @@
+// Import Angular modules
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component } from '@angular/core';
+
+// Import the TranslateModule to use the translate pipe
+import { TranslateModule } from '@ngx-translate/core';
 
 // Interface to define the Track object
 interface Track {
@@ -15,13 +19,30 @@ interface Track {
   selector: 'app-music',
   standalone: true,
   imports: [
-    CommonModule
+    CommonModule,
+    TranslateModule
   ],
   templateUrl: './music.component.html',
   styleUrl: './music.component.css'
 })
+
+/**
+ * Music component that provides an interactive audio player with track selection, playback control, 
+ * lyrics display, and downloading functionality.
+ * It dynamically loads track durations and lyrics from local assets, updates playback progress in 
+ * real-time, and ensures a smooth user experience.
+ * The component also manages UI interactions, such as expanding track containers, toggling playback, 
+ * and updating tooltips.
+ * It integrates with ngx-translate for multilingual support and uses HttpClient to fetch lyrics from 
+ * text files.
+ *
+ * @author Samuel Osuna Muñoz <samuel.osunam@gmail.com>
+ * @since 20250323
+ * @version 1.0.0
+ */
 export class MusicComponent implements AfterViewInit {
 
+  // Declaration of the variables used in the component
   private basePath = 'assets/music/';
   public audio: HTMLAudioElement = new Audio(); // Global audio player
   public selectedTrack: Track = {
@@ -40,6 +61,7 @@ export class MusicComponent implements AfterViewInit {
   public expandContainerOlal = false;
   public expandContainerDejame = false;
 
+  // Declaration of the tracks for each album
   momentosTracks: Track[] = [
     { title: 'Momentos', file: 'Momentos.mp3', duration: '', lyrics: '', album: "momentos" },
     { title: 'Tú', file: 'Tu.mp3', duration: '', lyrics: '', album: "momentos" },
@@ -162,14 +184,25 @@ export class MusicComponent implements AfterViewInit {
     { title: 'Eternity', file: 'Eternity.mp3', duration: '', album: "other" }
   ];
 
-  constructor(private http: HttpClient) {
-  }
 
+  /**
+   * Constructor of the component
+   * @param http - HttpClient to make requests to the server
+   */
+  constructor(private http: HttpClient) {}
+
+
+  /**
+   * Function invoked when the component is initialized
+   * This function loads the song durations and the lyrics of all songs
+   * It also updates the current time of the song in realtime
+   * and resets the times when the song ends
+   * @returns void
+   */
   ngOnInit(): void {
     this.loadSongDurations();
     this.loadLyrics();
 
-    // Update realtime the current time of the song
     this.audio.addEventListener('timeupdate', () => {
       this.currentTime = this.formatTime(this.audio.currentTime);
       this.totalTime = this.formatTime(this.audio.duration || 0);
@@ -180,23 +213,37 @@ export class MusicComponent implements AfterViewInit {
       }
     });
 
-    // Reset the times when the song ends
     this.audio.addEventListener('ended', () => {
       this.currentTime = '0:00';
       this.totalTime = '0:00';
     });
   }
 
+
+  /**
+   * Function invoked after the view is initialized
+   * This function loads the tooltips for the audio player controls
+   * @returns void
+   */
   ngAfterViewInit(): void {
     this.loadTooltips();
   }
 
+
+  /**
+   * Function invoked when the component is destroyed
+   * This function stops the audio player if it is playing
+   * @returns void
+   */
   ngOnDestroy(): void {
     this.togglePlayPause();
   }
 
+
   /**
    * Function to load the tooltips for the audio player controls.
+   * This function uses the Bootstrap Tooltip component to load the tooltips.
+   * @returns void
    */
   loadTooltips(): void {
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
@@ -205,8 +252,11 @@ export class MusicComponent implements AfterViewInit {
     );
   }
 
+  
   /**
    * Function to load the duration of all songs.
+   * This function uses the Audio object to load the duration of the songs.
+   * @returns void
    */
   loadSongDurations(): void {
     this.loadTrackDurations(this.momentosTracks, 'momentos');
@@ -217,8 +267,12 @@ export class MusicComponent implements AfterViewInit {
     this.loadTrackDurations(this.otherTrack, 'other');
   }
 
+
   /**
    * Generic function to load the duration of songs for a given track list and folder.
+   * @param trackList - List of tracks to load the duration
+   * @param folder - Folder where the tracks are located
+   * @returns void
    */
   loadTrackDurations(trackList: any[], folder: string): void {
     trackList.forEach(song => {
@@ -229,8 +283,12 @@ export class MusicComponent implements AfterViewInit {
     });
   }
 
+
   /**
    * Function to load the lyrics of all songs.
+   * This function uses the HttpClient to make requests to the server and load the lyrics of the songs.
+   * The lyrics are loaded from the Lyrics.txt file located in the lyrics folder of each album.
+   * @returns void
    */
   loadLyrics(): void {
     Promise.all([
@@ -243,8 +301,13 @@ export class MusicComponent implements AfterViewInit {
     });
   }
 
+
   /**
    * Generic function to load the lyrics of songs for a given track list and folder.
+   * @param trackList - List of tracks to load the lyrics
+   * @param folder - Folder where the tracks are located
+   * @returns Promise<void[]> - Promise to load the lyrics of all tracks
+   * @throws - This function throws an error if the lyrics are not found
    */
   loadTrackLyrics(trackList: any[], folder: string): Promise<void[]> {
     return Promise.all(
@@ -262,31 +325,78 @@ export class MusicComponent implements AfterViewInit {
     );
   }
 
+
   /**
    * Function to play a track
+   * This function plays the track in the audio player and expands the container of the track
    * @param track - Track to play
+   * @param container - Container to expand
+   * @returns void
    */
   playTrack(track: any, container: string): void {
-    if (this.selectedTrack === track) {
-      this.audio.pause();
-      this.selectedTrack = { title: '', file: '', duration: 'Escoge una Canción', lyrics: '', album: '' };
-      this.audio.src = '';
-      this.playing = false;
+    if (this.selectedTrack === track) {   // If the same track is selected, stop the audio player
+      this.resetSelectedTrack();
       this.restartExpandContainers();
-    } else {
-      this.selectedTrack = track;
-      this.audio.src = `${this.basePath}${this.selectedTrack.album}/tracks/${track.file}`;
-      this.audio.load();
-      this.audio.play();
-      this.playing = true;
+    } else {                              // If a different track is selected, play the track
+      this.loadTrack(track);
       this.restartExpandContainers();
       this.expandContainerToggle(container);
     }
   }
 
+
+  /**
+   * Function to reset the selected track
+   * This function resets the selected track and stops the audio player
+   * @returns void
+   */
+  private resetSelectedTrack(): void {
+    this.selectedTrack = {
+      title: '',
+      file: '',
+      duration: 'Escoge una Canción',
+      lyrics: '',
+      album: ''
+    };
+    this.audio.src = '';
+    this.playing = false;
+    this.audio.pause();
+  }
+
+
+  /**
+   * Function to load a track in the audio player
+   * This function loads the track in the audio player and plays it
+   * @param track - Track to load
+   * @returns void
+   */
+  private loadTrack(track: any): void {
+    this.selectedTrack = track;
+    this.audio.src = `${this.basePath}${this.selectedTrack.album}/tracks/${track.file}`;
+    this.audio.load();
+    this.audio.play();
+    this.playing = true;
+  }
+
+
+  /**
+   * Function to restart the expand containers to false
+   * This is used to close all the containers when a new song is played in a different player
+   * @returns void
+   */
+  restartExpandContainers(): void {
+    this.expandContainerMomentos = false;
+    this.expandContainerVivir = false;
+    this.expandContainerOlal = false;
+    this.expandContainerDejame = false;
+  }
+
+
   /**
    * Function to expand the container of a given track
+   * This function expands the container of the track to show the lyrics
    * @param container - Container to expand
+   * @returns void
    */
   expandContainerToggle(container: string): void {
     switch (container) {
@@ -307,19 +417,10 @@ export class MusicComponent implements AfterViewInit {
     }
   }
 
-  /**
-   * Function to restart the expand containers to false
-   * This is used to close all the containers when a new song is played in a different player
-   */
-  restartExpandContainers(): void {
-    this.expandContainerMomentos = false;
-    this.expandContainerVivir = false;
-    this.expandContainerOlal = false;
-    this.expandContainerDejame = false;
-  }
 
   /**
-   * Function to toggle the play/pause of the audio player
+   * Function to interact with the play/pause buttons of the audio player
+   * @returns void
    */
   togglePlayPause(): void {
     if (this.playing) {
@@ -331,15 +432,20 @@ export class MusicComponent implements AfterViewInit {
     }
   }
 
+
   /**
    * Function to update the current time of the audio player
+   * This function updates the current time of the audio player when the user 
+   * interacts with the progress bar of the audio player
    * @param event - Event to update the current time
+   * @returns void
    */
   updateCurrentTime(event: Event): void {
     const input = event.target as HTMLInputElement;
     this.audio.currentTime = parseFloat(input.value);
     this.currentTime = this.formatTime(this.audio.currentTime);
   }
+
 
   /**
    * Function to format the time in the audio player
@@ -355,9 +461,12 @@ export class MusicComponent implements AfterViewInit {
     return `${minutes}:${seconds}`;
   }
 
+
   /**
    * Function to download a track
+   * This function downloads the track when the user clicks on the download button
    * @param track - Track to download
+   * @returns void
    */
   downloadTrack(track: Track): void {
     const link = document.createElement('a');

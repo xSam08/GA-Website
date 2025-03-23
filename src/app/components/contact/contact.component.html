@@ -5,7 +5,7 @@
         <div class="col-12">
             <i class="fa-solid fa-envelope margin"></i>
             <span class="mailtext">
-                Envíame un Correo
+                {{ 'EMAIL_ME' | translate }}
             </span>
         </div>
         <div class="col-12">
@@ -29,12 +29,12 @@
                         contactForm.get('firstName')?.invalid && 
                         contactForm.get('firstName')?.touched
                     }"
-                >Nombre</label>
+                >{{ 'CFORM_NAME' | translate }}</label>
                 <input
                     type="text"
                     class="form-control mb-2"
                     id="firstName"
-                    placeholder="Ingresa tu nombre"
+                    placeholder="{{ 'CFORM_NAME_PLACEHOLDER' | translate }}"
                     formControlName="firstName"
                     autocomplete="off"
                     [ngClass]="{
@@ -45,7 +45,7 @@
                 >
                 <span *ngIf="contactForm.get('firstName')?.invalid && contactForm.get('firstName')?.touched" class="text-danger">
                     <i class="fa-solid fa-triangle-exclamation fa-beat margin"></i> 
-                    El nombre es obligatorio y mínimo 3 carácteres
+                    {{ 'CFORM_NAME_ERROR' | translate }}
                 </span>
             </div>
             <div class="col-12 col-md-6 mb-4">
@@ -57,12 +57,12 @@
                         contactForm.get('secondName')?.invalid && 
                         contactForm.get('secondName')?.touched
                     }"
-                >Apellido</label>
+                >{{ 'CFORM_LASTNAME' | translate }}</label>
                 <input
                     type="text"
                     class="form-control mb-2"
                     id="secondName"
-                    placeholder="Ingresa tu apellido"
+                    placeholder="{{ 'CFORM_LASTNAME_PLACEHOLDER' | translate }}"
                     formControlName="secondName"
                     autocomplete="off"
                     [ngClass]="{
@@ -73,7 +73,7 @@
                 >
                 <span *ngIf="contactForm.get('secondName')?.invalid && contactForm.get('secondName')?.touched" class="text-danger">
                     <i class="fa-solid fa-triangle-exclamation fa-beat margin"></i> 
-                    El apellido es obligatorio y mínimo 3 carácteres
+                    {{ 'CFORM_LASTNAME_ERROR' | translate }}
                 </span>
             </div>
         </div>
@@ -89,12 +89,12 @@
                         contactForm.get('email')?.invalid && 
                         contactForm.get('email')?.touched
                     }"
-                >E-Mail</label>
+                >{{ 'CFORM_EMAIL' | translate }}</label>
                 <input
                     type="email"
                     class="form-control mb-2"
                     id="email"
-                    placeholder="Ingresa tu correo electrónico"
+                    placeholder="{{ 'CFORM_EMAIL_PLACEHOLDER' | translate }}"
                     formControlName="email"
                     [ngClass]="{
                         'border-danger': 
@@ -104,7 +104,7 @@
                 >
                 <span *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched" class="text-danger">
                     <i class="fa-solid fa-triangle-exclamation fa-beat margin"></i> 
-                    El correo es inválido
+                    {{ 'CFORM_EMAIL_ERROR' | translate }}
                 </span>
             </div>
         </div>
@@ -120,12 +120,12 @@
                         contactForm.get('subject')?.invalid && 
                         contactForm.get('subject')?.touched
                     }"
-                >Asunto</label>
+                >{{ 'CFORM_SUBJECT' | translate }}</label>
                 <input
                     type="text"
                     class="form-control mb-2"
                     id="subject"
-                    placeholder="Ingresa el asunto"
+                    placeholder="{{ 'CFORM_SUBJECT_PLACEHOLDER' | translate }}"
                     formControlName="subject"
                     [ngClass]="{
                         'border-danger': 
@@ -135,8 +135,7 @@
                 >
                 <span *ngIf="contactForm.get('subject')?.invalid && contactForm.get('subject')?.touched" class="text-danger">
                     <i class="fa-solid fa-triangle-exclamation fa-beat margin"></i> 
-                    El asunto debe tener al menos 10 carácteres 
-                    (actualmente {{ contactForm.get('subject')?.value.length }})
+                    {{ 'CFORM_SUBJECT_ERROR' | translate }} {{ contactForm.get('subject')?.value.length }}&#41;.
                 </span>
             </div>
         </div>
@@ -152,12 +151,12 @@
                         contactForm.get('message')?.invalid && 
                         contactForm.get('message')?.touched
                     }"
-                >Mensaje</label>
+                >{{ 'CFORM_MESSAGE' | translate }}</label>
                 <textarea
                     class="form-control mb-2"
                     id="message"
                     rows="4"
-                    placeholder="Escribe tu mensaje"
+                    placeholder="{{ 'CFORM_MESSAGE_PLACEHOLDER' | translate }}"
                     formControlName="message"
                     autocomplete="off"
                     [ngClass]="{
@@ -168,8 +167,7 @@
                 ></textarea>
                 <span *ngIf="contactForm.get('message')?.invalid && contactForm.get('message')?.touched" class="text-danger">
                     <i class="fa-solid fa-triangle-exclamation fa-beat margin"></i> 
-                    El mensaje debe tener al menos 30 carácteres 
-                    (actualmente {{ contactForm.get('message')?.value.length }})
+                    {{ 'CFORM_MESSAGE_ERROR' | translate }} {{ contactForm.get('message')?.value.length }}&#41;.
                 </span>
             </div>
         </div>
@@ -184,7 +182,7 @@
                 </re-captcha>
                 <span *ngIf="contactForm.get('recaptcha')?.invalid && contactForm.get('recaptcha')?.touched" class="text-danger">
                     <i class="fa-solid fa-triangle-exclamation fa-beat margin"></i>
-                    Debes completar el reCAPTCHA
+                    {{ 'CFORM_RECAPTCHA_ERROR' | translate }}
                 </span>
             </div>
         </div>
@@ -193,7 +191,7 @@
         <div class="row pt-3">
             <div class="col-12 col-md-3">
                 <button type="submit" class="btn btn-primary w-100" [disabled]="contactForm.invalid">
-                    Enviar Mensaje
+                    {{ 'CFORM_SEND' | translate }}
                 </button>
             </div>
         </div>

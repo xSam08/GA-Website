@@ -6,18 +6,7 @@
             <h2 class="heading">
                 Momentos
             </h2>
-            <p class="text">
-                Este, mi primer disco, lanzado en 1995, reúne canciones compuestas entre finales de
-                1979 y 1994. El título del disco proviene de la primera canción, “Momentos”, con la
-                cual mi hija Ana María ganó el concurso intercolegial de música más importante de
-                Bogotá, organizado por Radioactiva, la emisora juvenil más popular en Colombia. <br><br>
-
-                Como premio, Radioactiva grabó un sencillo con dos canciones de mi autoría, incluyendo
-                “Momentos”, el cual comenzó a sonar en la emisora y se mantuvo en su ranking durante
-                varias semanas. Gracias a este éxito, Ana María tuvo la oportunidad de abrir el
-                concierto del reconocido cantante venezolano Ricardo Montaner, interpretando esta
-                canción ante miles de espectadores.
-            </p>
+            <p class="text" [innerHTML]="'MOMENTOS_DESC' | translate"></p>
             <div class="botones-externos mt-3">
                 <!-- External link to Spotify -->
                 <a href="https://open.spotify.com/album/2MNNo2kY4KAS6lZ1ZfCsH8?si=fmCmXChFROqKl-v79OeDFQ"
@@ -81,7 +70,7 @@
                 <div class="container-header">
                     <div class="col-3">
                         <img
-                            src="assets/music/momentos/Cover.jpg"
+                            src="assets/music/momentos/Cover.webp"
                             alt="Momentos Cover"
                             class="album-cover"
                         />
@@ -160,9 +149,8 @@
                 <!-- Copyright sign -->
                 <div class="col-12 mt-1">
                     <p class="copyright">
-                        <span class="sign">
-                            ©
-                        </span> Copyright, todos los derechos reservados, German Arciniegas Price
+                        <span class="sign">© </span> 
+                        {{ "COPYRIGHT" | translate }}
                     </p>
                 </div>
             </div>
@@ -179,18 +167,7 @@
             <h2 class="heading">
                 Vivir
             </h2>
-            <p class="text">
-                Este, mi segundo disco, lanzado en 2017, se distingue del primero por incluir varias 
-                composiciones instrumentales creadas entre 1987 y 1988, durante mi tiempo como 
-                estudiante de música, piano y composición en la Facultad de Música de la Universidad 
-                de Duke, en Durham, Carolina del Norte. Además, el álbum incorpora piezas compuestas 
-                en la década de los años 90. <br><br>
-
-                Es interesante notar que, en los casi 13 años posteriores al año 2000, mientras 
-                trabajaba para Oracle, una destacada compañía de tecnología, no hubo mucho espacio 
-                para la música. Esto parece confirmar la idea de que las musas necesitan un ambiente 
-                propicio para manifestarse.
-            </p>
+            <p class="text" [innerHTML]="'VIVIR_DESC' | translate"></p>
             <div class="botones-externos mt-3">
                 <!-- External link to Spotify -->
                 <a href="https://open.spotify.com/intl-es/album/5MPDSmir6QUkF8D4TadoiU?si=Cp8gj8wTQRmDcqBp_MF_Xg"
@@ -254,7 +231,7 @@
                 <div class="container-header">
                     <div class="col-3">
                         <img
-                            src="assets/music/vivir/Cover.jpg"
+                            src="assets/music/vivir/Cover.webp"
                             alt="Vivir Cover"
                             class="album-cover"
                         />
@@ -333,9 +310,8 @@
                 <!-- Copyright sign -->
                 <div class="col-12 mt-1">
                     <p class="copyright">
-                        <span class="sign">
-                            ©
-                        </span> Copyright, todos los derechos reservados, German Arciniegas Price
+                        <span class="sign">© </span> 
+                        {{ "COPYRIGHT" | translate }}
                     </p>
                 </div>
             </div>
@@ -353,14 +329,7 @@
                 Of Life and Love
             </h2>
             <p class="text">
-                Es un álbum especial para mí. Está completamente en inglés y, a diferencia de otros 
-                proyectos míos, no incluye pistas instrumentales. Este disco representa un corto 
-                período de mi vida, entre 2017 y 2020, cuando estaba profundamente involucrado en la 
-                música: componiendo, cantando y presentándome en vivo. Durante esos años, me uní a 
-                Angela Taylor para formar un dúo llamado The Power of Two, y juntos llevamos muchas 
-                de estas canciones al escenario. Como su título lo sugiere, el álbum gira en torno a 
-                los temas del amor y la vida. Cada tema lleva consigo una parte mía, reflejando las 
-                emociones e historias que quería compartir durante esos años creativos.
+                {{ "OLAL_DESC" | translate }}
             </p>
             <div class="botones-externos mt-3">
                 <!-- External link to Spotify -->
@@ -425,7 +394,7 @@
                 <div class="container-header">
                     <div class="col-3">
                         <img
-                            src="assets/music/olal/Cover.jpg"
+                            src="assets/music/olal/Cover.webp"
                             alt="Of Life and Love Cover"
                             class="album-cover"
                         />
@@ -504,9 +473,8 @@
                 <!-- Copyright sign -->
                 <div class="col-12 mt-1">
                     <p class="copyright">
-                        <span class="sign">
-                            ©
-                        </span> Copyright, todos los derechos reservados, German Arciniegas Price
+                        <span class="sign">© </span> 
+                        {{ "COPYRIGHT" | translate }}
                     </p>
                 </div>
             </div>
@@ -524,14 +492,7 @@
                 Déjame
             </h2>
             <p class="text">
-                Este es un álbum sencillo, es decir que solo incluye una canción. En mi intento de 
-                explorar distintos géneros musicales, puedo decir que esta es la primera canción en 
-                forma de bolero que he escrito. El bolero, originario de Cuba a finales del siglo 
-                XIX, es uno de los géneros de música romántica más populares de América Latina, 
-                caracterizado por sus temas de amor y desamor, así como por su ritmo lento y 
-                melancólico. Crecí escuchando boleros en las voces de mi mamá, mis hermanos y mis 
-                tíos Price, quienes armonizaban en varias voces durante las inolvidables veladas 
-                musicales en casa.
+                {{ "DEJAME_DESC" | translate }}
             </p>
             <div class="botones-externos mt-3">
                 <!-- External link to Spotify -->
@@ -596,8 +557,8 @@
                 <div class="container-header">
                     <div class="col-3">
                         <img
-                            src="assets/music/dejame/Cover.jpeg"
-                            alt="Momentos Cover"
+                            src="assets/music/dejame/Cover.webp"
+                            alt="Dejame Cover"
                             class="album-cover"
                         />
                     </div>
@@ -675,9 +636,8 @@
                 <!-- Copyright sign -->
                 <div class="col-12 mt-1">
                     <p class="copyright">
-                        <span class="sign">
-                            ©
-                        </span> Copyright, todos los derechos reservados, German Arciniegas Price
+                        <span class="sign">© </span> 
+                        {{ "COPYRIGHT" | translate }}
                     </p>
                 </div>
             </div>
@@ -713,7 +673,7 @@
                     <div class="col-3">
                         <img
                             src="assets/music/po2-d/Cover.png"
-                            alt="Momentos Cover"
+                            alt="Po2-duet Cover"
                             class="album-cover"
                         />
                     </div>
@@ -779,9 +739,8 @@
 
                 <div class="col-12 mt-1">
                     <p class="copyright">
-                        <span class="sign">
-                            ©
-                        </span> Copyright, todos los derechos reservados, German Arciniegas Price
+                        <span class="sign">© </span> 
+                        {{ "COPYRIGHT" | translate }}
                     </p>
                 </div>
             </div>
@@ -881,9 +840,8 @@
                 <!-- Copyright sign -->
                 <div class="col-12 mt-1">
                     <p class="copyright">
-                        <span class="sign">
-                            ©
-                        </span> Copyright, todos los derechos reservados, German Arciniegas Price
+                        <span class="sign">© </span> 
+                        {{ "COPYRIGHT" | translate }}
                     </p>
                 </div>
             </div>

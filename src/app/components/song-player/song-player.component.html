@@ -2,6 +2,6 @@
 <div class="player-container">
     <audio #audioPlayer controls>
         <source [attr.src]="songSrc" type="audio/mp3" />
-        Tu navegador no soporta el reproductor de audio.
+        {{ "INCOMPATIBLE_BROWSER" | translate }}
     </audio>
 </div>
