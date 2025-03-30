@@ -8,12 +8,13 @@
         <div class="col-12 col-md-7">
             <p class="text" [innerHTML]="'CVUVM_DESC' | translate"></p>
             <div class="mb-5">
-                <div class="dropdown mt-4">
-                    <button class="btn btn-primary" (click)="toggleDropdown('CVUVM')">
-                        {{ "PLACES_TO_BUY" | translate }} <i class="fas fa-caret-down"></i>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        {{ "PLACES_TO_BUY" | translate }}
                     </button>
-                    <ul class="dropdown-menu" [ngClass]="{'d-block': cvuvmDropdown}">
-                        <li><a class="dropdown-item" href="#">Pending...</a></li>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item">Pending...</a></li>
                     </ul>
                 </div>
             </div>
@@ -32,12 +33,13 @@
         <div class="col-12 col-md-7">
             <p class="text" [innerHTML]="'HDLDMV_DESC' | translate"></p>
             <div class="mb-5">
-                <div class="dropdown mt-4">
-                    <button class="btn btn-primary" (click)="toggleDropdown('HDLDMV')">
-                        {{ "PLACES_TO_BUY" | translate }} <i class="fas fa-caret-down"></i>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        {{ "PLACES_TO_BUY" | translate }}
                     </button>
-                    <ul class="dropdown-menu" [ngClass]="{'d-block': hdldmvDropdown}">
-                        <li><a class="dropdown-item" href="#">Pending...</a></li>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item">Pending...</a></li>
                     </ul>
                 </div>
             </div>
@@ -52,20 +54,20 @@
     <div class="row mt-5">
         <div class="col-12 col-md-5 mb-4 d-flex justify-content-center">
             <!-- <img src="assets/CVUVM.jpg" alt="Libro Notas de la Sinfonía de mi Vida" class="image2"> -->
-             <h2 class="d-flex justify-content-center align-items-center" 
-                 style="color: var(--golden)">
-                 Imágen pendiente...
+            <h2 class="d-flex justify-content-center align-items-center" style="color: var(--golden)">
+                {{ "PENDING_IMAGE" | translate }}
             </h2>
         </div>
         <div class="col-12 col-md-7">
             <p class="text" [innerHTML]="'NDLSDMV_DESC' | translate"></p>
             <div class="mb-5">
-                <div class="dropdown mt-4">
-                    <button class="btn btn-primary" (click)="toggleDropdown('NDLSDMV')">
-                        {{ "PLACES_TO_BUY" | translate }} <i class="fas fa-caret-down"></i>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        {{ "PLACES_TO_BUY" | translate }}
                     </button>
-                    <ul class="dropdown-menu" [ngClass]="{'d-block': ndlsdmvDropdown}">
-                        <li><a class="dropdown-item" href="#">Pending...</a></li>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item">Pending...</a></li>
                     </ul>
                 </div>
             </div>

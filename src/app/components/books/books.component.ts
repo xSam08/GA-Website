@@ -27,29 +27,4 @@ import { TranslateModule } from '@ngx-translate/core';
  */
 export class BooksComponent {
 
-  // Definition of variables to store the state of the dropdowns
-  cvuvmDropdown = false;
-  hdldmvDropdown = false;
-  ndlsdmvDropdown = false;
-
-  /**
-   * Function to toggle the dropdowns
-   * @param button - the button that was clicked
-   * @returns void
-   */
-  toggleDropdown(button: string): void {
-    switch (button) {
-      case 'CVUVM':
-        this.cvuvmDropdown = !this.cvuvmDropdown;
-        break;
-      case 'HDLDMV':
-        this.hdldmvDropdown = !this.hdldmvDropdown;
-        break;
-      case 'NDLSDMV':
-        this.ndlsdmvDropdown = !this.ndlsdmvDropdown;
-        break;
-      default:
-        break;
-    }
-  }
 }

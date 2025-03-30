@@ -14,7 +14,8 @@
                     <i class="fa-brands fa-spotify"
                        data-bs-toggle="tooltip"
                        data-bs-placement="top"
-                       data-bs-title="Escuchar en Spotify"></i>
+                       [attr.data-bs-title]="tooltips.TOOLTIP_SPOTIFY">
+                    </i>
                 </a>
 
                 <!-- External link to Youtube Music -->
@@ -23,7 +24,8 @@
                     <i class="fa-brands fa-youtube"
                        data-bs-toggle="tooltip"
                        data-bs-placement="top"
-                       data-bs-title="Escuchar en Youtube Music"></i>
+                       [attr.data-bs-title]="tooltips.TOOLTIP_YOUTUBE">
+                    </i>
                 </a>
 
                 <!-- External link to Deezer -->
@@ -32,7 +34,8 @@
                     <i class="fa-brands fa-deezer"
                        data-bs-toggle="tooltip"
                        data-bs-placement="top"
-                       data-bs-title="Escuchar en Deezer"></i>
+                       [attr.data-bs-title]="tooltips.TOOLTIP_DEEZER">
+                    </i>
                 </a>
 
                 <!-- External link to Bandcamp -->
@@ -41,7 +44,8 @@
                     <i class="fa-brands fa-bandcamp"
                        data-bs-toggle="tooltip"
                        data-bs-placement="top"
-                       data-bs-title="Escuchar en Bandcamp"></i>
+                       [attr.data-bs-title]="tooltips.TOOLTIP_BANDCAMP">
+                    </i>
                 </a>
 
                 <!-- External link to Amazon Music -->
@@ -50,7 +54,8 @@
                     <i class="fa-brands fa-amazon"
                        data-bs-toggle="tooltip"
                        data-bs-placement="top"
-                       data-bs-title="Escuchar en Amazon Music"></i>
+                       [attr.data-bs-title]="tooltips.TOOLTIP_AMAZON">
+                    </i>
                 </a>
 
                 <!-- External link to Apple Music -->
@@ -59,7 +64,8 @@
                     <i class="fa-brands fa-apple"
                        data-bs-toggle="tooltip"
                        data-bs-placement="top"
-                       data-bs-title="Escuchar en Apple Music"></i>
+                       [attr.data-bs-title]="tooltips.TOOLTIP_APPLE">
+                    </i>
                 </a>
             </div>
         </div>
@@ -125,13 +131,15 @@
                                 <div class="track-info">
                                     <p class="track-title">{{ track.title }}</p>
                                 </div>
-                                <span class="track-duration">{{ track.duration || 'Loading...' }}</span>
+                                <span class="track-duration">
+                                    {{ track.duration || ('LOADING_SONG' | translate) }}
+                                </span>
                                 <span 
-                                    class="download"
+                                    class="download mt-1"
                                     (click)="downloadTrack(track)"
                                     data-bs-toggle="tooltip"
                                     data-bs-placement="top"
-                                    data-bs-title="Descargar la canción"
+                                    [attr.data-bs-title]="tooltips.TOOLTIP_DOWNLOAD"
                                 >
                                     <i class="fa-solid fa-download"></i>
                                 </span>
@@ -175,7 +183,8 @@
                     <i class="fa-brands fa-spotify"
                        data-bs-toggle="tooltip"
                        data-bs-placement="top"
-                       data-bs-title="Escuchar en Spotify"></i>
+                       [attr.data-bs-title]="tooltips.TOOLTIP_SPOTIFY">
+                    </i>
                 </a>
 
                 <!-- External link to Youtube Music -->
@@ -184,7 +193,8 @@
                     <i class="fa-brands fa-youtube"
                        data-bs-toggle="tooltip"
                        data-bs-placement="top"
-                       data-bs-title="Escuchar en Youtube Music"></i>
+                       [attr.data-bs-title]="tooltips.TOOLTIP_YOUTUBE">
+                    </i>
                 </a>
 
                 <!-- External link to Deezer -->
@@ -193,7 +203,8 @@
                     <i class="fa-brands fa-deezer"
                        data-bs-toggle="tooltip"
                        data-bs-placement="top"
-                       data-bs-title="Escuchar en Deezer"></i>
+                       [attr.data-bs-title]="tooltips.TOOLTIP_DEEZER">
+                    </i>
                 </a>
 
                 <!-- External link to Bandcamp -->
@@ -202,7 +213,8 @@
                     <i class="fa-brands fa-bandcamp"
                        data-bs-toggle="tooltip"
                        data-bs-placement="top"
-                       data-bs-title="Escuchar en Bandcamp"></i>
+                       [attr.data-bs-title]="tooltips.TOOLTIP_BANDCAMP">
+                    </i>
                 </a>
 
                 <!-- External link to Amazon Music -->
@@ -211,7 +223,8 @@
                     <i class="fa-brands fa-amazon"
                        data-bs-toggle="tooltip"
                        data-bs-placement="top"
-                       data-bs-title="Escuchar en Amazon Music"></i>
+                       [attr.data-bs-title]="tooltips.TOOLTIP_AMAZON">
+                    </i>
                 </a>
 
                 <!-- External link to Apple Music -->
@@ -220,7 +233,8 @@
                     <i class="fa-brands fa-apple"
                        data-bs-toggle="tooltip"
                        data-bs-placement="top"
-                       data-bs-title="Escuchar en Apple Music"></i>
+                       [attr.data-bs-title]="tooltips.TOOLTIP_APPLE">
+                    </i>
                 </a>
             </div>
         </div>
@@ -286,13 +300,15 @@
                                 <div class="track-info">
                                     <p class="track-title">{{ track.title }}</p>
                                 </div>
-                                <span class="track-duration">{{ track.duration || 'Loading...' }}</span>
+                                <span class="track-duration">
+                                    {{ track.duration || ('LOADING_SONG' | translate) }}
+                                </span>
                                 <span 
-                                    class="download"
+                                    class="download mt-1"
                                     (click)="downloadTrack(track)"
                                     data-bs-toggle="tooltip"
                                     data-bs-placement="top"
-                                    data-bs-title="Descargar la canción"
+                                    [attr.data-bs-title]="tooltips.TOOLTIP_DOWNLOAD"
                                 >
                                     <i class="fa-solid fa-download"></i>
                                 </span>
@@ -338,7 +354,8 @@
                     <i class="fa-brands fa-spotify"
                        data-bs-toggle="tooltip"
                        data-bs-placement="top"
-                       data-bs-title="Escuchar en Spotify"></i>
+                       [attr.data-bs-title]="tooltips.TOOLTIP_SPOTIFY">
+                    </i>
                 </a>
 
                 <!-- External link to Youtube Music -->
@@ -347,7 +364,8 @@
                     <i class="fa-brands fa-youtube"
                        data-bs-toggle="tooltip"
                        data-bs-placement="top"
-                       data-bs-title="Escuchar en Youtube Music"></i>
+                       [attr.data-bs-title]="tooltips.TOOLTIP_YOUTUBE">
+                    </i>
                 </a>
 
                 <!-- External link to Deezer -->
@@ -356,7 +374,8 @@
                     <i class="fa-brands fa-deezer"
                        data-bs-toggle="tooltip"
                        data-bs-placement="top"
-                       data-bs-title="Escuchar en Deezer"></i>
+                       [attr.data-bs-title]="tooltips.TOOLTIP_DEEZER">
+                    </i>
                 </a>
 
                 <!-- External link to Bandcamp -->
@@ -365,7 +384,8 @@
                     <i class="fa-brands fa-bandcamp"
                        data-bs-toggle="tooltip"
                        data-bs-placement="top"
-                       data-bs-title="Escuchar en Bandcamp"></i>
+                       [attr.data-bs-title]="tooltips.TOOLTIP_BANDCAMP">
+                    </i>
                 </a>
 
                 <!-- External link to Amazon Music -->
@@ -374,7 +394,8 @@
                     <i class="fa-brands fa-amazon"
                        data-bs-toggle="tooltip"
                        data-bs-placement="top"
-                       data-bs-title="Escuchar en Amazon Music"></i>
+                       [attr.data-bs-title]="tooltips.TOOLTIP_AMAZON">
+                    </i>
                 </a>
 
                 <!-- External link to Apple Music -->
@@ -383,7 +404,8 @@
                     <i class="fa-brands fa-apple"
                        data-bs-toggle="tooltip"
                        data-bs-placement="top"
-                       data-bs-title="Escuchar en Apple Music"></i>
+                       [attr.data-bs-title]="tooltips.TOOLTIP_APPLE">
+                    </i>
                 </a>
             </div>
         </div>
@@ -449,13 +471,15 @@
                                 <div class="track-info">
                                     <p class="track-title">{{ track.title }}</p>
                                 </div>
-                                <span class="track-duration">{{ track.duration || 'Loading...' }}</span>
+                                <span class="track-duration">
+                                    {{ track.duration || ('LOADING_SONG' | translate) }}
+                                </span>
                                 <span 
-                                    class="download"
+                                    class="download mt-1"
                                     (click)="downloadTrack(track)"
                                     data-bs-toggle="tooltip"
                                     data-bs-placement="top"
-                                    data-bs-title="Descargar la canción"
+                                    [attr.data-bs-title]="tooltips.TOOLTIP_DOWNLOAD"
                                 >
                                     <i class="fa-solid fa-download"></i>
                                 </span>
@@ -501,7 +525,8 @@
                     <i class="fa-brands fa-spotify"
                        data-bs-toggle="tooltip"
                        data-bs-placement="top"
-                       data-bs-title="Escuchar en Spotify"></i>
+                       [attr.data-bs-title]="tooltips.TOOLTIP_SPOTIFY">
+                    </i>
                 </a>
 
                 <!-- External link to Youtube Music -->
@@ -510,7 +535,8 @@
                     <i class="fa-brands fa-youtube"
                        data-bs-toggle="tooltip"
                        data-bs-placement="top"
-                       data-bs-title="Escuchar en Youtube Music"></i>
+                       [attr.data-bs-title]="tooltips.TOOLTIP_YOUTUBE">
+                    </i>
                 </a>
 
                 <!-- External link to Deezer -->
@@ -519,7 +545,8 @@
                     <i class="fa-brands fa-deezer"
                        data-bs-toggle="tooltip"
                        data-bs-placement="top"
-                       data-bs-title="Escuchar en Deezer"></i>
+                       [attr.data-bs-title]="tooltips.TOOLTIP_DEEZER">
+                    </i>
                 </a> -->
 
                 <!-- External link to Bandcamp -->
@@ -528,7 +555,8 @@
                     <i class="fa-brands fa-bandcamp"
                        data-bs-toggle="tooltip"
                        data-bs-placement="top"
-                       data-bs-title="Escuchar en Bandcamp"></i>
+                       [attr.data-bs-title]="tooltips.TOOLTIP_BANDCAMP">
+                    </i>
                 </a> -->
 
                 <!-- External link to Amazon Music -->
@@ -537,7 +565,8 @@
                     <i class="fa-brands fa-amazon"
                        data-bs-toggle="tooltip"
                        data-bs-placement="top"
-                       data-bs-title="Escuchar en Amazon Music"></i>
+                       [attr.data-bs-title]="tooltips.TOOLTIP_AMAZON">
+                    </i>
                 </a>
 
                 <!-- External link to Apple Music -->
@@ -546,7 +575,8 @@
                     <i class="fa-brands fa-apple"
                        data-bs-toggle="tooltip"
                        data-bs-placement="top"
-                       data-bs-title="Escuchar en Apple Music"></i>
+                       [attr.data-bs-title]="tooltips.TOOLTIP_APPLE">
+                    </i>
                 </a>
             </div>
         </div>
@@ -612,13 +642,15 @@
                                 <div class="track-info">
                                     <p class="track-title">{{ track.title }}</p>
                                 </div>
-                                <span class="track-duration">{{ track.duration || 'Loading...' }}</span>
+                                <span class="track-duration">
+                                    {{ track.duration || ('LOADING_SONG' | translate) }}
+                                </span>
                                 <span 
-                                    class="download"
+                                    class="download mt-1"
                                     (click)="downloadTrack(track)"
                                     data-bs-toggle="tooltip"
                                     data-bs-placement="top"
-                                    data-bs-title="Descargar la canción"
+                                    [attr.data-bs-title]="tooltips.TOOLTIP_DOWNLOAD"
                                 >
                                     <i class="fa-solid fa-download"></i>
                                 </span>
@@ -722,13 +754,15 @@
                                 <div class="track-info">
                                     <p class="track-title">{{ track.title }}</p>
                                 </div>
-                                <span class="track-duration">{{ track.duration || 'Loading...' }}</span>
+                                <span class="track-duration">
+                                    {{ track.duration || ('LOADING_SONG' | translate) }}
+                                </span>
                                 <span 
-                                    class="download"
+                                    class="download mt-1"
                                     (click)="downloadTrack(track)"
                                     data-bs-toggle="tooltip"
                                     data-bs-placement="top"
-                                    data-bs-title="Descargar la canción"
+                                    [attr.data-bs-title]="tooltips.TOOLTIP_DOWNLOAD"
                                 >
                                     <i class="fa-solid fa-download"></i>
                                 </span>        
@@ -755,29 +789,20 @@
     <div class="row mt-5">
         <div class="col-12 col-md-6">
             <h2 class="heading">
-                Otras Canciones no incluidas en los Discos anteriores
+                {{ "OTHER_SONGS_TITLE" | translate }}
             </h2>
-            <p class="text">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
-                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
-                occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <br><br>
-
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, 
-                eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam 
-                voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione 
-                voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci 
-                velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
-            </p>
+            <p class="text" [innerHTML]="'OTHER_SONGS_DESC' | translate"></p>
         </div>
         <div class="col-12 col-md-6">
             <div class="music-player-container">
 
                 <!-- Heading, about the disk and Player Controls -->
                 <div class="container-header">
-                    <div class="col-12 ps-4 pe-4">
+                    <div class="col-12 pt-1 ps-2 pe-2">
                         <div class="album-info">
-                            <h2 class="album-title">Otras Canciones</h2>
+                            <h2 class="album-title">
+                                {{ "OTHER_SONGS_PLAYER" | translate }}
+                            </h2>
                             <p class="artist-name">German Arciniegas</p>
                         </div>
 
@@ -822,13 +847,15 @@
                                 <div class="track-info">
                                     <p class="track-title">{{ track.title }}</p>
                                 </div>
-                                <span class="track-duration">{{ track.duration || 'Loading...' }}</span>
+                                <span class="track-duration">
+                                    {{ track.duration || ('LOADING_SONG' | translate) }}
+                                </span>
                                 <span 
-                                    class="download"
+                                    class="download mt-1"
                                     (click)="downloadTrack(track)"
                                     data-bs-toggle="tooltip"
                                     data-bs-placement="top"
-                                    data-bs-title="Descargar la canción"
+                                    [attr.data-bs-title]="tooltips.TOOLTIP_DOWNLOAD"
                                 >
                                     <i class="fa-solid fa-download"></i>
                                 </span>

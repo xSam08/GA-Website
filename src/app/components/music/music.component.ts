@@ -5,6 +5,7 @@ import { AfterViewInit, Component } from '@angular/core';
 
 // Import the TranslateModule to use the translate pipe
 import { TranslateModule } from '@ngx-translate/core';
+import { LanguageService } from '../../services/language.service';
 
 // Interface to define the Track object
 interface Track {
@@ -48,7 +49,7 @@ export class MusicComponent implements AfterViewInit {
   public selectedTrack: Track = {
     title: '',
     file: '',
-    duration: 'Escoge una Canción',
+    duration: '',
     lyrics: '',
     album: ''
   };
@@ -60,6 +61,7 @@ export class MusicComponent implements AfterViewInit {
   public expandContainerVivir = false;
   public expandContainerOlal = false;
   public expandContainerDejame = false;
+  public tooltips: any = {};
 
   // Declaration of the tracks for each album
   momentosTracks: Track[] = [
@@ -188,20 +190,31 @@ export class MusicComponent implements AfterViewInit {
   /**
    * Constructor of the component
    * @param http - HttpClient to make requests to the server
+   * @param languageService - LanguageService to manage the translations
    */
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private languageService: LanguageService
+  ) {
+    this.setDefaultDuration();
+  }
 
 
   /**
    * Function invoked when the component is initialized
    * This function loads the song durations and the lyrics of all songs
-   * It also updates the current time of the song in realtime
-   * and resets the times when the song ends
+   * It also subscribes to the language changes to load the translations, updates the current
+   * time of the song in realtime and resets the times when the song ends
    * @returns void
    */
   ngOnInit(): void {
     this.loadSongDurations();
     this.loadLyrics();
+
+    this.languageService.langChanged$.subscribe(() => {
+      this.loadTranslations();
+      this.setDefaultDuration();
+    });
 
     this.audio.addEventListener('timeupdate', () => {
       this.currentTime = this.formatTime(this.audio.currentTime);
@@ -222,11 +235,11 @@ export class MusicComponent implements AfterViewInit {
 
   /**
    * Function invoked after the view is initialized
-   * This function loads the tooltips for the audio player controls
+   * This function refreshes the tooltips when the view is initialized
    * @returns void
    */
   ngAfterViewInit(): void {
-    this.loadTooltips();
+    this.refreshTooltips();
   }
 
 
@@ -241,15 +254,13 @@ export class MusicComponent implements AfterViewInit {
 
 
   /**
-   * Function to load the tooltips for the audio player controls.
-   * This function uses the Bootstrap Tooltip component to load the tooltips.
+   * Function to set the default duration of the songs
+   * This function sets the default duration of the songs when the component is initialized
    * @returns void
    */
-  loadTooltips(): void {
-    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-    const tooltipList = Array.from(tooltipTriggerList).map(tooltipTriggerEl => 
-      new (window as any).bootstrap.Tooltip(tooltipTriggerEl)
-    );
+  setDefaultDuration(): void {
+    const currentLang = this.languageService.getCurrentLang();
+    this.selectedTrack.duration = currentLang === 'en' ? 'Choose a Song' : 'Escoge una Canción';
   }
 
   
@@ -354,7 +365,7 @@ export class MusicComponent implements AfterViewInit {
     this.selectedTrack = {
       title: '',
       file: '',
-      duration: 'Escoge una Canción',
+      duration: '',
       lyrics: '',
       album: ''
     };
@@ -475,5 +486,42 @@ export class MusicComponent implements AfterViewInit {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  }
+
+
+  /**
+   * Function to load the translations of the tooltips
+   * This function loads the translations of the tooltips when the language changes
+   * @returns void
+   */
+  loadTranslations(): void {
+    const keys = [
+      'TOOLTIP_SPOTIFY',
+      'TOOLTIP_YOUTUBE',
+      'TOOLTIP_DEEZER',
+      'TOOLTIP_BANDCAMP',
+      'TOOLTIP_AMAZON',
+      'TOOLTIP_APPLE',
+      'TOOLTIP_DOWNLOAD'
+    ];
+    this.languageService.getTranslations(keys).subscribe(translations => {
+      this.tooltips = translations;
+      this.refreshTooltips();
+    });
+  }
+
+
+  /**
+   * Function to refresh the tooltips
+   * This function refreshes the tooltips when the language changes
+   * @returns void
+   */
+  refreshTooltips(): void {
+    setTimeout(() => {
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+      tooltipTriggerList.forEach((tooltipTriggerEl) => {
+        new (window as any).bootstrap.Tooltip(tooltipTriggerEl);
+      });
+    }, 100);
   }
 }

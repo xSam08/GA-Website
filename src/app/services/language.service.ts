@@ -4,6 +4,9 @@ import { Injectable } from '@angular/core';
 // Import the TranslateService from ngx-translate
 import { TranslateService } from '@ngx-translate/core';
 
+// Import BehaviorSubject and Observable from rxjs
+import { BehaviorSubject, Observable  } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -27,6 +30,7 @@ export class LanguageService {
 
   // Variable to store the current language
   private currentLang: string = 'es';
+  private langSubject: BehaviorSubject<string>;
 
   /**
    * Constructor of the service
@@ -36,6 +40,7 @@ export class LanguageService {
     const savedLang = localStorage.getItem('language');
     this.currentLang = savedLang ? savedLang : 'es';
     this.translate.use(this.currentLang);
+    this.langSubject = new BehaviorSubject<string>(this.currentLang);
   }
 
   /**
@@ -47,6 +52,7 @@ export class LanguageService {
     this.currentLang = lang;
     this.translate.use(lang);
     localStorage.setItem('language', lang);
+    this.langSubject.next(lang);
   }
 
   /**
@@ -55,5 +61,22 @@ export class LanguageService {
    */
   getCurrentLang(): string {
     return this.currentLang;
+  }
+
+  /**
+   * Function to get the current language as an observable
+   * @returns - An observable of the current language
+   */
+  get langChanged$(): Observable<string> {
+    return this.langSubject.asObservable();
+  }
+
+  /**
+   * Function to get translations for a list of keys
+   * @param keys - The keys to get translations for
+   * @return - An observable of the translations
+   */
+  getTranslations(keys: string[]): Observable<any> {
+    return this.translate.get(keys);
   }
 }
