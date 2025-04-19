@@ -110,6 +110,10 @@
                                 </button>
                                 <span class="total-time">{{ this.selectedTrack.duration }}</span>
                             </div>
+                            <div class="nombre-cancion text-center" *ngIf="selectedTrack && expandContainerMomentos">
+                                {{ "CURRENT_SONG" | translate }} <i class="fa-solid fa-arrow-right ps-2 pe-2"></i> 
+                                {{ selectedTrack.title }}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -278,6 +282,10 @@
                                     ></i>
                                 </button>
                                 <span class="total-time">{{ this.selectedTrack.duration }}</span>
+                            </div>
+                            <div class="nombre-cancion text-center" *ngIf="selectedTrack && expandContainerVivir">
+                                {{ "CURRENT_SONG" | translate }} <i class="fa-solid fa-arrow-right ps-2 pe-2"></i> 
+                                {{ selectedTrack.title }}
                             </div>
                         </div>
                     </div>
@@ -450,6 +458,10 @@
                                 </button>
                                 <span class="total-time">{{ this.selectedTrack.duration }}</span>
                             </div>
+                            <div class="nombre-cancion text-center" *ngIf="selectedTrack && expandContainerOlal">
+                                {{ "CURRENT_SONG" | translate }} <i class="fa-solid fa-arrow-right ps-2 pe-2"></i> 
+                                {{ selectedTrack.title }}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -621,6 +633,10 @@
                                 </button>
                                 <span class="total-time">{{ this.selectedTrack.duration }}</span>
                             </div>
+                            <div class="nombre-cancion text-center" *ngIf="selectedTrack && expandContainerDejame">
+                                {{ "CURRENT_SONG" | translate }} <i class="fa-solid fa-arrow-right ps-2 pe-2"></i> 
+                                {{ selectedTrack.title }}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -737,6 +753,10 @@
                                 </button>
                                 <span class="total-time">{{ this.selectedTrack.duration }}</span>
                             </div>
+                            <div class="nombre-cancion text-center" *ngIf="selectedTrack && expandContainerPo2dueto">
+                                {{ "CURRENT_SONG" | translate }} <i class="fa-solid fa-arrow-right ps-2 pe-2"></i> 
+                                {{ selectedTrack.title }}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -828,6 +848,10 @@
                                     ></i>
                                 </button>
                                 <span class="total-time">{{ this.selectedTrack.duration }}</span>
+                            </div>
+                            <div class="nombre-cancion text-center" *ngIf="selectedTrack && expandContainerOther">
+                                {{ "CURRENT_SONG" | translate }} <i class="fa-solid fa-arrow-right ps-2 pe-2"></i> 
+                                {{ selectedTrack.title }}
                             </div>
                         </div>
                     </div>

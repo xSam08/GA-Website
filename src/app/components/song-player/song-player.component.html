@@ -1,7 +1,12 @@
 <!-- Music player -->
 <div class="player-container">
-    <audio #audioPlayer controls>
-        <source [attr.src]="songSrc" type="audio/mp3" />
-        {{ "INCOMPATIBLE_BROWSER" | translate }}
-    </audio>
+    <div class="info-container text-center">
+        <audio #audioPlayer controls>
+            <source [attr.src]="songSrc" type="audio/mp3" />
+            {{ "INCOMPATIBLE_BROWSER" | translate }}
+        </audio>
+        <h2 class="song-title" *ngIf="showTitle">
+            {{ "SONG_TITLE_PLAYER" | translate }} {{ song }}
+        </h2>
+    </div>
 </div>

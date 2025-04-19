@@ -53,6 +53,13 @@ export class MusicComponent implements AfterViewInit {
     lyrics: '',
     album: ''
   };
+  public track: Track = {
+    title: '',
+    file: '',
+    duration: '',
+    lyrics: '',
+    album: ''
+  };
   public currentTime = '0:00';
   public totalTime = '0:00';
   public playing = false;
@@ -61,6 +68,7 @@ export class MusicComponent implements AfterViewInit {
   public expandContainerVivir = false;
   public expandContainerOlal = false;
   public expandContainerDejame = false;
+  public expandContainerOther = false;
   public tooltips: any = {};
 
   // Declaration of the tracks for each album
@@ -227,9 +235,12 @@ export class MusicComponent implements AfterViewInit {
     });
 
     this.audio.addEventListener('ended', () => {
-      this.currentTime = '0:00';
-      this.totalTime = '0:00';
+      this.playing = false;
     });
+
+    // this.audio.addEventListener('play', () => {
+    //
+    // });
   }
 
 
@@ -369,6 +380,7 @@ export class MusicComponent implements AfterViewInit {
       lyrics: '',
       album: ''
     };
+    this.setDefaultDuration();
     this.audio.src = '';
     this.playing = false;
     this.audio.pause();
@@ -400,6 +412,7 @@ export class MusicComponent implements AfterViewInit {
     this.expandContainerVivir = false;
     this.expandContainerOlal = false;
     this.expandContainerDejame = false;
+    this.expandContainerOther = false;
   }
 
 
@@ -422,6 +435,9 @@ export class MusicComponent implements AfterViewInit {
         break;
       case 'dejame':
         this.expandContainerDejame = !this.expandContainerDejame;
+        break;
+      case 'other':
+        this.expandContainerOther = !this.expandContainerOther;
         break;
       default:
         break;

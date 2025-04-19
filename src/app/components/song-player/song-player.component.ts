@@ -2,6 +2,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 // Import ngx-toastr for notifications
 import { ToastrService } from 'ngx-toastr';
@@ -13,7 +14,8 @@ import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-song-player',
   imports: [
-    TranslateModule
+    TranslateModule,
+    CommonModule
   ],
   templateUrl: './song-player.component.html',
   styleUrl: './song-player.component.css'
@@ -50,6 +52,7 @@ export class SongPlayerComponent {
   songsData: any;
   errorMessage: string = '';
   lang: 'es' | 'en';
+  showTitle: boolean = false;
 
   // Translations for the notifications
   private translations = {
@@ -135,11 +138,28 @@ export class SongPlayerComponent {
     setTimeout(() => {
       if (this.audioPlayer) {
         this.audioPlayer.nativeElement.load();
+        this.song = this.formatSongTitle(this.song);
+        this.showTitle = true;
         this.toastr.success(
           this.translations[this.lang].songLoaded,
           this.translations[this.lang].success
         );
       }
     }, 100);
+  }
+
+  /**
+   * Function to format the song title from the slug
+   * It splits the slug by '-' and capitalizes each word
+   * @param slug - The slug of the song
+   * @returns The formatted song title
+   */
+  formatSongTitle(slug: string): string {
+    if (!slug) return '';
+    const words = slug.split('-');
+    const fullTitle = words.join(' ').toLowerCase();
+    console.log(fullTitle);
+    
+    return fullTitle.charAt(0).toUpperCase() + fullTitle.slice(1);
   }
 }
