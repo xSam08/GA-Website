@@ -11,9 +11,17 @@ import { LanguageService } from '../../services/language.service';
 interface Track {
   title: string;
   file: string;
-  duration: string;
+  duration: string | null;
   lyrics?: string;
   album: string;
+}
+
+// Interface to define the PlayerState object
+interface PlayerState {
+  selectedTrack: Track | null;
+  expandContainer: boolean;
+  playing: boolean;
+  isLocked: boolean;
 }
 
 @Component({
@@ -43,33 +51,25 @@ interface Track {
  */
 export class MusicComponent implements AfterViewInit {
 
+  // Index signature to allow dynamic properties in togglePlayPause function
+  [key: string]: any;
+
   // Declaration of the variables used in the component
   private basePath = 'assets/music/';
   public audio: HTMLAudioElement = new Audio(); // Global audio player
-  public selectedTrack: Track = {
-    title: '',
-    file: '',
-    duration: '',
-    lyrics: '',
-    album: ''
-  };
-  public track: Track = {
-    title: '',
-    file: '',
-    duration: '',
-    lyrics: '',
-    album: ''
-  };
   public currentTime = '0:00';
   public totalTime = '0:00';
-  public playing = false;
-  public expandContainer = false;
-  public expandContainerMomentos = false;
-  public expandContainerVivir = false;
-  public expandContainerOlal = false;
-  public expandContainerDejame = false;
-  public expandContainerOther = false;
   public tooltips: any = {};
+  public lockedPlayer: any;
+  public showButtons: boolean = false;
+
+  // Use the PlayerState interface to define the player state for each album
+  momentosPlayer: PlayerState = { selectedTrack: null, expandContainer: false, playing: false, isLocked: false };
+  vivirPlayer: PlayerState = { selectedTrack: null, expandContainer: false, playing: false, isLocked: false };
+  olalPlayer: PlayerState = { selectedTrack: null, expandContainer: false, playing: false, isLocked: false };
+  dejamePlayer: PlayerState = { selectedTrack: null, expandContainer: false, playing: false, isLocked: false };
+  po2duetPlayer: PlayerState = { selectedTrack: null, expandContainer: false, playing: false, isLocked: false };
+  otherPlayer: PlayerState = { selectedTrack: null, expandContainer: false, playing: false, isLocked: false };
 
   // Declaration of the tracks for each album
   momentosTracks: Track[] = [
@@ -203,9 +203,7 @@ export class MusicComponent implements AfterViewInit {
   constructor(
     private http: HttpClient,
     private languageService: LanguageService
-  ) {
-    this.setDefaultDuration();
-  }
+  ) {}
 
 
   /**
@@ -221,7 +219,6 @@ export class MusicComponent implements AfterViewInit {
 
     this.languageService.langChanged$.subscribe(() => {
       this.loadTranslations();
-      this.setDefaultDuration();
     });
 
     this.audio.addEventListener('timeupdate', () => {
@@ -235,7 +232,7 @@ export class MusicComponent implements AfterViewInit {
     });
 
     this.audio.addEventListener('ended', () => {
-      this.playing = false;
+      // this.playing = false;
     });
 
     // this.audio.addEventListener('play', () => {
@@ -264,17 +261,6 @@ export class MusicComponent implements AfterViewInit {
   }
 
 
-  /**
-   * Function to set the default duration of the songs
-   * This function sets the default duration of the songs when the component is initialized
-   * @returns void
-   */
-  setDefaultDuration(): void {
-    const currentLang = this.languageService.getCurrentLang();
-    this.selectedTrack.duration = currentLang === 'en' ? 'Choose a Song' : 'Escoge una Canción';
-  }
-
-  
   /**
    * Function to load the duration of all songs.
    * This function uses the Audio object to load the duration of the songs.
@@ -334,7 +320,7 @@ export class MusicComponent implements AfterViewInit {
   loadTrackLyrics(trackList: any[], folder: string): Promise<void[]> {
     return Promise.all(
       trackList.map(track =>
-        this.http.get(`${this.basePath}${folder}/lyrics/${track.file.replace('.mp3', 'Lyrics.txt')}`, 
+        this.http.get(`${this.basePath}${folder}/lyrics/${track.file.replace('.mp3', 'Lyrics.txt')}`,
           { responseType: 'text' })
           .toPromise()
           .then(lyrics => {
@@ -355,34 +341,64 @@ export class MusicComponent implements AfterViewInit {
    * @param container - Container to expand
    * @returns void
    */
-  playTrack(track: any, container: string): void {
-    if (this.selectedTrack === track) {   // If the same track is selected, stop the audio player
-      this.resetSelectedTrack();
-      this.restartExpandContainers();
+  playTrack(player: string, track?: any): void {
+
+    if (!track) {
+      this.resetPlayerState(player);
+      this.restartExpandContainers(player);
+      this.unlockPlayers(player);
+      return;
+    }
+
+    const currentPlayer = this[player + 'Player'];
+
+    if (currentPlayer.selectedTrack === track) {   // If the same track is selected, stop the audio player
+      this.resetPlayerState(player);
+      this.restartExpandContainers(player);
+      this.unlockPlayers(player);
     } else {                              // If a different track is selected, play the track
-      this.loadTrack(track);
-      this.restartExpandContainers();
-      this.expandContainerToggle(container);
+      this.resetAllPlayers();
+      this.loadTrack(track, player);
+      this.restartExpandContainers(player);
+      this.expandContainerToggle(player);
     }
   }
 
 
   /**
-   * Function to reset the selected track
-   * This function resets the selected track and stops the audio player
+   * Function to reset all players
+   * This function resets all players to their default state
    * @returns void
    */
-  private resetSelectedTrack(): void {
-    this.selectedTrack = {
-      title: '',
-      file: '',
-      duration: '',
-      lyrics: '',
-      album: ''
-    };
-    this.setDefaultDuration();
+  resetAllPlayers(): void {
+    // Reset all players to their default state
+    this.resetPlayerState('momentos');
+    this.resetPlayerState('vivir');
+    this.resetPlayerState('olal');
+    this.resetPlayerState('dejame');
+    this.resetPlayerState('po2duet');
+    this.resetPlayerState('other');
+
+    // Reset the audio player
     this.audio.src = '';
-    this.playing = false;
+    this.audio.pause();
+  }
+
+
+  /**
+   * Function to reset the selected track
+   * @param container - The player container to reset
+   * @returns void
+   */
+  private resetPlayerState(player: string): void {
+    const currentPlayer = this[player + 'Player'];
+
+    currentPlayer.selectedTrack = null;
+    currentPlayer.expandContainer = false;
+    currentPlayer.playing = false;
+    this.showButtons = false;
+
+    this.audio.src = '';
     this.audio.pause();
   }
 
@@ -391,71 +407,121 @@ export class MusicComponent implements AfterViewInit {
    * Function to load a track in the audio player
    * This function loads the track in the audio player and plays it
    * @param track - Track to load
+   * @param player - Name of the player (e.g., 'momentos', 'vivir', etc.)
    * @returns void
    */
-  private loadTrack(track: any): void {
-    this.selectedTrack = track;
-    this.audio.src = `${this.basePath}${this.selectedTrack.album}/tracks/${track.file}`;
-    this.audio.load();
-    this.audio.play();
-    this.playing = true;
+  private loadTrack(track: any, player: string): void {
+    const currentPlayer = this[player + 'Player'];
+
+    // Block other players
+    this.lockPlayers(player);
+
+    // Show control buttons
+    this.showButtons = true;
+
+    // Set the track to the selected player
+    currentPlayer.selectedTrack = track;
+
+    // Set the audio source and play
+    if (currentPlayer.selectedTrack) {
+      this.audio.src = `${this.basePath}${currentPlayer.selectedTrack.album}/tracks/${track.file}`;
+      this.audio.load();
+      this.audio.play();
+      currentPlayer.playing = true;
+    }
   }
 
 
   /**
-   * Function to restart the expand containers to false
-   * This is used to close all the containers when a new song is played in a different player
-   * @returns void
+   * Function to lock other players when a song is loaded in a specific player
+   * @param player - The player that is currently being used
    */
-  restartExpandContainers(): void {
-    this.expandContainerMomentos = false;
-    this.expandContainerVivir = false;
-    this.expandContainerOlal = false;
-    this.expandContainerDejame = false;
-    this.expandContainerOther = false;
-  }
+  private lockPlayers(player: string): void {
+    const players = ['momentos', 'vivir', 'olal', 'dejame', 'po2duet', 'other'];
 
+    for (const key of players) {
+      if (key !== player) {
+        this[key + 'Player'].isLocked = true;
+      }
+    }
 
-  /**
-   * Function to expand the container of a given track
-   * This function expands the container of the track to show the lyrics
-   * @param container - Container to expand
-   * @returns void
-   */
-  expandContainerToggle(container: string): void {
-    switch (container) {
+    switch (player) {
       case 'momentos':
-        this.expandContainerMomentos = !this.expandContainerMomentos;
+        this.lockedPlayer = "Momentos";
         break;
       case 'vivir':
-        this.expandContainerVivir = !this.expandContainerVivir;
+        this.lockedPlayer = "Vivir";
         break;
       case 'olal':
-        this.expandContainerOlal = !this.expandContainerOlal;
+        this.lockedPlayer = "Of Life and Love";
         break;
       case 'dejame':
-        this.expandContainerDejame = !this.expandContainerDejame;
+        this.lockedPlayer = "Déjame";
+        break;
+      case 'po2duet':
+        this.lockedPlayer = "Power of Two - Duet";
         break;
       case 'other':
-        this.expandContainerOther = !this.expandContainerOther;
-        break;
-      default:
+        this.lockedPlayer = "Additional Songs";
         break;
     }
   }
 
 
   /**
-   * Function to interact with the play/pause buttons of the audio player
+   * Function to unlock other players
+   * @param player - The player that is currently being used
+   */
+  private unlockPlayers(player: string): void {
+    const players = ['momentos', 'vivir', 'olal', 'dejame', 'po2duet', 'other'];
+
+    for (const key of players) {
+      if (key !== player) {
+        this[key + 'Player'].isLocked = false;
+      }
+    }
+  }
+
+
+  /**
+   * Function to restart expand containers
+   * @param container - The player container to reset
    * @returns void
    */
-  togglePlayPause(): void {
-    if (this.playing) {
-      this.audio.pause();
-      this.playing = false;
+  restartExpandContainers(container: string): void {
+    const currentContainer = this[container + 'Player'];
+    currentContainer.expandContainer = false;
+  }
+
+
+  /**
+   * Function to expand the container of a given track
+   * @param container - Container to expand
+   * @returns void
+   */
+  expandContainerToggle(container: string): void {
+    const currentContainer = this[container + 'Player'];
+    currentContainer.expandContainer = !currentContainer.expandContainer;
+  }
+
+
+  /**
+   * Function to interact with the play/pause buttons of the audio player
+   * @param player - The player to control (optional). If not provided, stop the music for all players.
+   * @returns void
+   */
+  togglePlayPause(player?: string): void {
+    if (player) {
+      const currentPlayer = this[player + 'Player'];
+      if (currentPlayer.playing) {
+        this.audio.pause();
+        currentPlayer.playing = false;
+      } else {
+        this.audio.play();
+        currentPlayer.playing = true;
+      }
     } else {
-      this.audio.play();
-      this.playing = true;
+      this.audio.pause();
     }
   }
 
@@ -481,8 +547,8 @@ export class MusicComponent implements AfterViewInit {
    */
   formatTime(time: number): string {
     if (isNaN(time) || !isFinite(time)) {
-    return '0:00';
-  }
+      return '0:00';
+    }
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60).toString().padStart(2, '0');
     return `${minutes}:${seconds}`;
@@ -518,7 +584,9 @@ export class MusicComponent implements AfterViewInit {
       'TOOLTIP_BANDCAMP',
       'TOOLTIP_AMAZON',
       'TOOLTIP_APPLE',
-      'TOOLTIP_DOWNLOAD'
+      'TOOLTIP_DOWNLOAD',
+      'TOOLTIP_STOP',
+      'TOOLTIP_RESUME'
     ];
     this.languageService.getTranslations(keys).subscribe(translations => {
       this.tooltips = translations;

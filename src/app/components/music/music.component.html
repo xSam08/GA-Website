@@ -69,8 +69,18 @@
                 </a>
             </div>
         </div>
-        <div class="col-12 col-md-6">
-            <div class="music-player-container">
+        <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
+
+            <!-- Locked message -->
+            <div *ngIf="momentosPlayer.isLocked" class="locked-message">
+                <p>
+                    {{ "LOCKED_INFO" | translate }} 
+                    <i class="fa-solid fa-stop" style="margin-left: 7px; color: white;"></i>
+                </p>
+            </div>
+
+
+            <div *ngIf="!momentosPlayer.isLocked" class="music-player-container" >
 
                 <!-- Heading, about the disk and Player Controls -->
                 <div class="container-header">
@@ -99,20 +109,37 @@
                                     (input)="updateCurrentTime($event)"
                                 />
                             </div>
-                            <div class="play-controls">
+                            <div class="play-controls mt-2">
                                 <span class="current-time">{{ currentTime }}</span>
-                                <button class="play-btn">
-                                    <i
+                                <div class="control-buttons">
+                                    <i  *ngIf="this.showButtons"
                                         class="main-button fa-solid"
-                                        [ngClass]="this.playing ? 'fa-pause' : 'fa-play'"
-                                        (click)="togglePlayPause()"    
+                                        style="margin-right: 30px;"
+                                        [ngClass]="this.momentosPlayer.playing ? 'fa-pause' : 'fa-play'"
+                                        (click)="togglePlayPause('momentos')"
+                                        data-bs-toggle="tooltip"
+                                        
+                                        [attr.data-bs-title]="tooltips.TOOLTIP_RESUME"   
                                     ></i>
-                                </button>
-                                <span class="total-time">{{ this.selectedTrack.duration }}</span>
+                                    <i  *ngIf="this.showButtons"
+                                        class="fa-solid fa-stop cursor"
+                                        (click)="playTrack('momentos')"
+                                        data-bs-toggle="tooltip"
+                                        data-bs-placement="top"
+                                        [attr.data-bs-title]="tooltips.TOOLTIP_STOP"
+                                    ></i>
+                                </div>
+                                <span class="total-time">
+                                    {{ 
+                                        momentosPlayer.selectedTrack?.duration == null ? 
+                                        ('SONG_DURATION' | translate) : 
+                                        momentosPlayer.selectedTrack?.duration
+                                    }}
+                                </span>
                             </div>
-                            <div class="nombre-cancion text-center" *ngIf="selectedTrack && expandContainerMomentos">
+                            <div class="nombre-cancion text-center mt-2" *ngIf="momentosPlayer.playing">
                                 {{ "CURRENT_SONG" | translate }} <i class="fa-solid fa-arrow-right ps-2 pe-2"></i> 
-                                {{ selectedTrack.title }}
+                                {{ momentosPlayer.selectedTrack?.title }}
                             </div>
                         </div>
                     </div>
@@ -121,15 +148,15 @@
                 <!-- Songs List -->
                 <div
                     class="container-track-list p-2"
-                    [ngClass]="{ 'expanded': expandContainerMomentos }"
+                    [ngClass]="{ 'expanded': momentosPlayer.expandContainer }"
                 >
                     <div class="scrollable-content">
                         <ul class="track-list">
                             <li
                                 *ngFor="let track of momentosTracks; let i = index"
                                 class="track"
-                                (click)="playTrack(track, 'momentos')"
-                                [ngClass]="{'active': selectedTrack === track}"
+                                (click)="playTrack('momentos', track)"
+                                [ngClass]="{'active': momentosPlayer.selectedTrack === track}"
                             >
                                 <span class="track-number">{{ i + 1 }}</span>
                                 <div class="track-info">
@@ -149,7 +176,7 @@
                                 </span>
 
                                 <!-- Dynamic container to show the track lyrics -->
-                                <div *ngIf="selectedTrack === track" class="lyrics-container">
+                                <div *ngIf="momentosPlayer.selectedTrack === track" class="lyrics-container">
                                     <p class="lyrics">{{ track.lyrics }}</p>
                                 </div>
                                 
@@ -242,8 +269,17 @@
                 </a>
             </div>
         </div>
-        <div class="col-12 col-md-6">
-            <div class="music-player-container">
+        <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
+
+            <!-- Locked message -->
+            <div *ngIf="vivirPlayer.isLocked" class="locked-message">
+                <p>
+                    {{ "LOCKED_INFO" | translate }} 
+                    <i class="fa-solid fa-stop" style="margin-left: 7px; color: white;"></i>
+                </p>
+            </div>
+
+            <div *ngIf="!vivirPlayer.isLocked" class="music-player-container">
 
                 <!-- Heading, about the disk and Player Controls -->
                 <div class="container-header">
@@ -272,20 +308,37 @@
                                     (input)="updateCurrentTime($event)"
                                 />
                             </div>
-                            <div class="play-controls">
+                            <div class="play-controls mt-2">
                                 <span class="current-time">{{ currentTime }}</span>
-                                <button class="play-btn">
-                                    <i
+                                <div class="control-buttons">
+                                    <i  *ngIf="this.showButtons"
                                         class="main-button fa-solid"
-                                        [ngClass]="this.playing ? 'fa-pause' : 'fa-play'"
-                                        (click)="togglePlayPause()"    
+                                        style="margin-right: 30px;"
+                                        [ngClass]="this.vivirPlayer.playing ? 'fa-pause' : 'fa-play'"
+                                        (click)="togglePlayPause('vivir')"
+                                        data-bs-toggle="tooltip"
+                                        
+                                        [attr.data-bs-title]="tooltips.TOOLTIP_RESUME"   
                                     ></i>
-                                </button>
-                                <span class="total-time">{{ this.selectedTrack.duration }}</span>
+                                    <i  *ngIf="this.showButtons"
+                                        class="fa-solid fa-stop cursor"
+                                        (click)="playTrack('vivir')"
+                                        data-bs-toggle="tooltip"
+                                        data-bs-placement="top"
+                                        [attr.data-bs-title]="tooltips.TOOLTIP_STOP"
+                                    ></i>
+                                </div>
+                                <span class="total-time">
+                                    {{ 
+                                        vivirPlayer.selectedTrack?.duration == null ? 
+                                        ('SONG_DURATION' | translate) : 
+                                        vivirPlayer.selectedTrack?.duration
+                                    }}
+                                </span>
                             </div>
-                            <div class="nombre-cancion text-center" *ngIf="selectedTrack && expandContainerVivir">
+                            <div class="nombre-cancion text-center" *ngIf="vivirPlayer.playing">
                                 {{ "CURRENT_SONG" | translate }} <i class="fa-solid fa-arrow-right ps-2 pe-2"></i> 
-                                {{ selectedTrack.title }}
+                                {{ vivirPlayer.selectedTrack?.title }}
                             </div>
                         </div>
                     </div>
@@ -294,15 +347,15 @@
                 <!-- Songs List -->
                 <div
                     class="container-track-list p-2"
-                    [ngClass]="{ 'expanded': expandContainerVivir }"
+                    [ngClass]="{ 'expanded': vivirPlayer.expandContainer }"
                 >
                     <div class="scrollable-content">
                         <ul class="track-list">
                             <li
                                 *ngFor="let track of vivirTracks; let i = index"
                                 class="track"
-                                (click)="playTrack(track, 'vivir')"
-                                [ngClass]="{'active': selectedTrack === track}"
+                                (click)="playTrack('vivir', track)"
+                                [ngClass]="{'active': vivirPlayer.selectedTrack === track}"
                             >
                                 <span class="track-number">{{ i + 1 }}</span>
                                 <div class="track-info">
@@ -322,7 +375,7 @@
                                 </span>
 
                                 <!-- Dynamic container to show the track lyrics -->
-                                <div *ngIf="selectedTrack === track" class="lyrics-container">
+                                <div *ngIf="vivirPlayer.selectedTrack === track" class="lyrics-container">
                                     <p class="lyrics">{{ track.lyrics }}</p>
                                 </div>
                                 
@@ -417,8 +470,17 @@
                 </a>
             </div>
         </div>
-        <div class="col-12 col-md-6">
-            <div class="music-player-container">
+        <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
+
+            <!-- Locked message -->
+            <div *ngIf="olalPlayer.isLocked" class="locked-message">
+                <p>
+                    {{ "LOCKED_INFO" | translate }} 
+                    <i class="fa-solid fa-stop" style="margin-left: 7px; color: white;"></i>
+                </p>
+            </div>
+
+            <div *ngIf="!olalPlayer.isLocked" class="music-player-container">
 
                 <!-- Heading, about the disk and Player Controls -->
                 <div class="container-header">
@@ -447,20 +509,37 @@
                                     (input)="updateCurrentTime($event)"
                                 />
                             </div>
-                            <div class="play-controls">
+                            <div class="play-controls mt-2">
                                 <span class="current-time">{{ currentTime }}</span>
-                                <button class="play-btn">
-                                    <i
+                                <div class="control-buttons">
+                                    <i  *ngIf="this.showButtons"
                                         class="main-button fa-solid"
-                                        [ngClass]="this.playing ? 'fa-pause' : 'fa-play'"
-                                        (click)="togglePlayPause()"    
+                                        style="margin-right: 30px;"
+                                        [ngClass]="this.olalPlayer.playing ? 'fa-pause' : 'fa-play'"
+                                        (click)="togglePlayPause('olal')"
+                                        data-bs-toggle="tooltip"
+                                        
+                                        [attr.data-bs-title]="tooltips.TOOLTIP_RESUME"   
                                     ></i>
-                                </button>
-                                <span class="total-time">{{ this.selectedTrack.duration }}</span>
+                                    <i  *ngIf="this.showButtons"
+                                        class="fa-solid fa-stop cursor"
+                                        (click)="playTrack('olal')"
+                                        data-bs-toggle="tooltip"
+                                        data-bs-placement="top"
+                                        [attr.data-bs-title]="tooltips.TOOLTIP_STOP"
+                                    ></i>
+                                </div>
+                                <span class="total-time">
+                                    {{ 
+                                        olalPlayer.selectedTrack?.duration == null ? 
+                                        ('SONG_DURATION' | translate) : 
+                                        olalPlayer.selectedTrack?.duration
+                                    }}
+                                </span>
                             </div>
-                            <div class="nombre-cancion text-center" *ngIf="selectedTrack && expandContainerOlal">
+                            <div class="nombre-cancion text-center" *ngIf="olalPlayer.playing">
                                 {{ "CURRENT_SONG" | translate }} <i class="fa-solid fa-arrow-right ps-2 pe-2"></i> 
-                                {{ selectedTrack.title }}
+                                {{ olalPlayer.selectedTrack?.title }}
                             </div>
                         </div>
                     </div>
@@ -469,15 +548,15 @@
                 <!-- Songs List -->
                 <div
                     class="container-track-list p-2"
-                    [ngClass]="{ 'expanded': expandContainerOlal }"
+                    [ngClass]="{ 'expanded': olalPlayer.expandContainer }"
                 >
                     <div class="scrollable-content">
                         <ul class="track-list">
                             <li
                                 *ngFor="let track of olalTracks; let i = index"
                                 class="track"
-                                (click)="playTrack(track, 'olal')"
-                                [ngClass]="{'active': selectedTrack === track}"
+                                (click)="playTrack('olal', track)"
+                                [ngClass]="{'active': olalPlayer.selectedTrack === track}"
                             >
                                 <span class="track-number">{{ i + 1 }}</span>
                                 <div class="track-info">
@@ -497,7 +576,7 @@
                                 </span>
 
                                 <!-- Dynamic container to show the track lyrics -->
-                                <div *ngIf="selectedTrack === track" class="lyrics-container">
+                                <div *ngIf="olalPlayer.selectedTrack === track" class="lyrics-container">
                                     <p class="lyrics">{{ track.lyrics }}</p>
                                 </div>
                                 
@@ -592,8 +671,17 @@
                 </a>
             </div>
         </div>
-        <div class="col-12 col-md-6">
-            <div class="music-player-container">
+        <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
+
+            <!-- Locked message -->
+            <div *ngIf="dejamePlayer.isLocked" class="locked-message">
+                <p>
+                    {{ "LOCKED_INFO" | translate }} 
+                    <i class="fa-solid fa-stop" style="margin-left: 7px; color: white;"></i>
+                </p>
+            </div>
+
+            <div *ngIf="!dejamePlayer.isLocked" class="music-player-container">
 
                 <!-- Heading, about the disk and Player Controls -->
                 <div class="container-header">
@@ -622,20 +710,37 @@
                                     (input)="updateCurrentTime($event)"
                                 />
                             </div>
-                            <div class="play-controls">
+                            <div class="play-controls mt-2">
                                 <span class="current-time">{{ currentTime }}</span>
-                                <button class="play-btn">
-                                    <i
+                                <div class="control-buttons">
+                                    <i  *ngIf="this.showButtons"
                                         class="main-button fa-solid"
-                                        [ngClass]="this.playing ? 'fa-pause' : 'fa-play'"
-                                        (click)="togglePlayPause()"    
+                                        style="margin-right: 30px;"
+                                        [ngClass]="this.dejamePlayer.playing ? 'fa-pause' : 'fa-play'"
+                                        (click)="togglePlayPause('dejame')"
+                                        data-bs-toggle="tooltip"
+                                        
+                                        [attr.data-bs-title]="tooltips.TOOLTIP_RESUME"   
                                     ></i>
-                                </button>
-                                <span class="total-time">{{ this.selectedTrack.duration }}</span>
+                                    <i  *ngIf="this.showButtons"
+                                        class="fa-solid fa-stop cursor"
+                                        (click)="playTrack('dejame')"
+                                        data-bs-toggle="tooltip"
+                                        data-bs-placement="top"
+                                        [attr.data-bs-title]="tooltips.TOOLTIP_STOP"
+                                    ></i>
+                                </div>
+                                <span class="total-time">
+                                    {{ 
+                                        dejamePlayer.selectedTrack?.duration == null ? 
+                                        ('SONG_DURATION' | translate) : 
+                                        dejamePlayer.selectedTrack?.duration
+                                    }}
+                                </span>
                             </div>
-                            <div class="nombre-cancion text-center" *ngIf="selectedTrack && expandContainerDejame">
+                            <div class="nombre-cancion text-center" *ngIf="dejamePlayer.playing">
                                 {{ "CURRENT_SONG" | translate }} <i class="fa-solid fa-arrow-right ps-2 pe-2"></i> 
-                                {{ selectedTrack.title }}
+                                {{ dejamePlayer.selectedTrack?.title }}
                             </div>
                         </div>
                     </div>
@@ -644,15 +749,15 @@
                 <!-- Songs List -->
                 <div
                     class="container-track-list dejame p-2"
-                    [ngClass]="{ 'expanded': expandContainerDejame }"
+                    [ngClass]="{ 'expanded': dejamePlayer.expandContainer }"
                 >
                     <div class="scrollable-content">
                         <ul class="track-list">
                             <li
                                 *ngFor="let track of dejameTrack; let i = index"
                                 class="track"
-                                (click)="playTrack(track, 'dejame')"
-                                [ngClass]="{'active': selectedTrack === track}"
+                                (click)="playTrack('dejame', track)"
+                                [ngClass]="{'active': dejamePlayer.selectedTrack === track}"
                             >
                                 <span class="track-number">{{ i + 1 }}</span>
                                 <div class="track-info">
@@ -672,7 +777,7 @@
                                 </span>
 
                                 <!-- Dynamic container to show the track lyrics -->
-                                <div *ngIf="selectedTrack === track" class="lyrics-container">
+                                <div *ngIf="dejamePlayer.selectedTrack === track" class="lyrics-container">
                                     <p class="lyrics">{{ track.lyrics }}</p>
                                 </div>
                                 
@@ -714,8 +819,16 @@
                 velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
             </p>
         </div>
-        <div class="col-12 col-md-6">
-            <div class="music-player-container">
+        <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
+
+            <div *ngIf="po2duetPlayer.isLocked" class="locked-message">
+                <p>
+                    {{ "LOCKED_INFO" | translate }} 
+                    <i class="fa-solid fa-stop" style="margin-left: 7px; color: white;"></i>
+                </p>
+            </div>
+
+            <div *ngIf="!po2duetPlayer.isLocked" class="music-player-container">
 
                 <div class="container-header">
                     <div class="col-3">
@@ -742,20 +855,37 @@
                                     (input)="updateCurrentTime($event)"
                                 />
                             </div>
-                            <div class="play-controls">
+                            <div class="play-controls mt-2">
                                 <span class="current-time">{{ currentTime }}</span>
-                                <button class="play-btn">
-                                    <i
+                                <div class="control-buttons">
+                                    <i  *ngIf="this.showButtons"
                                         class="main-button fa-solid"
-                                        [ngClass]="this.playing ? 'fa-pause' : 'fa-play'"
-                                        (click)="togglePlayPause()"    
+                                        style="margin-right: 30px;"
+                                        [ngClass]="this.po2duetPlayer.playing ? 'fa-pause' : 'fa-play'"
+                                        (click)="togglePlayPause('po2-d')"
+                                        data-bs-toggle="tooltip"
+                                        
+                                        [attr.data-bs-title]="tooltips.TOOLTIP_RESUME"   
                                     ></i>
-                                </button>
-                                <span class="total-time">{{ this.selectedTrack.duration }}</span>
+                                    <i  *ngIf="this.showButtons"
+                                        class="fa-solid fa-stop cursor"
+                                        (click)="playTrack('po2-d')"
+                                        data-bs-toggle="tooltip"
+                                        data-bs-placement="top"
+                                        [attr.data-bs-title]="tooltips.TOOLTIP_STOP"
+                                    ></i>
+                                </div>
+                                <span class="total-time">
+                                    {{ 
+                                        po2duetPlayer.selectedTrack?.duration == null ? 
+                                        ('SONG_DURATION' | translate) : 
+                                        po2duetPlayer.selectedTrack?.duration
+                                    }}
+                                </span>
                             </div>
-                            <div class="nombre-cancion text-center" *ngIf="selectedTrack && expandContainerPo2dueto">
+                            <div class="nombre-cancion text-center" *ngIf="po2duetPlayer.playing">
                                 {{ "CURRENT_SONG" | translate }} <i class="fa-solid fa-arrow-right ps-2 pe-2"></i> 
-                                {{ selectedTrack.title }}
+                                {{ po2duetPlayer.selectedTrack?.title }}
                             </div>
                         </div>
                     </div>
@@ -767,8 +897,8 @@
                             <li
                                 *ngFor="let track of po2duetoTrack; let i = index"
                                 class="track"
-                                (click)="playTrack(track, 'po2-d')"
-                                [ngClass]="{'active': selectedTrack === track}"
+                                (click)="playTrack('po2-d', track)"
+                                [ngClass]="{'active': po2duetPlayer.selectedTrack === track}"
                             >
                                 <span class="track-number">{{ i + 1 }}</span>
                                 <div class="track-info">
@@ -807,14 +937,24 @@
 
     <!-- Other -->
     <div class="row mt-5">
+
         <div class="col-12 col-md-6">
             <h2 class="heading">
                 {{ "OTHER_SONGS_TITLE" | translate }}
             </h2>
             <p class="text" [innerHTML]="'OTHER_SONGS_DESC' | translate"></p>
         </div>
-        <div class="col-12 col-md-6">
-            <div class="music-player-container">
+
+        <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
+
+            <div *ngIf="otherPlayer.isLocked" class="locked-message">
+                <p>
+                    {{ "LOCKED_INFO" | translate }} 
+                    <i class="fa-solid fa-stop" style="margin-left: 7px; color: white;"></i>
+                </p>
+            </div>
+
+            <div *ngIf="!otherPlayer.isLocked" class="music-player-container">
 
                 <!-- Heading, about the disk and Player Controls -->
                 <div class="container-header">
@@ -838,34 +978,54 @@
                                     (input)="updateCurrentTime($event)"
                                 />
                             </div>
-                            <div class="play-controls">
+                            <div class="play-controls mt-2">
                                 <span class="current-time">{{ currentTime }}</span>
-                                <button class="play-btn">
-                                    <i
+                                <div class="control-buttons">
+                                    <i  *ngIf="this.showButtons"
                                         class="main-button fa-solid"
-                                        [ngClass]="this.playing ? 'fa-pause' : 'fa-play'"
-                                        (click)="togglePlayPause()"    
+                                        style="margin-right: 30px;"
+                                        [ngClass]="this.otherPlayer.playing ? 'fa-pause' : 'fa-play'"
+                                        (click)="togglePlayPause('other')"
+                                        data-bs-toggle="tooltip"
+                                        
+                                        [attr.data-bs-title]="tooltips.TOOLTIP_RESUME"   
                                     ></i>
-                                </button>
-                                <span class="total-time">{{ this.selectedTrack.duration }}</span>
+                                    <i  *ngIf="this.showButtons"
+                                        class="fa-solid fa-stop cursor"
+                                        (click)="playTrack('other')"
+                                        data-bs-toggle="tooltip"
+                                        data-bs-placement="top"
+                                        [attr.data-bs-title]="tooltips.TOOLTIP_STOP"
+                                    ></i>
+                                </div>
+                                <span class="total-time">
+                                    {{ 
+                                        otherPlayer.selectedTrack?.duration == null ? 
+                                        ('SONG_DURATION' | translate) : 
+                                        otherPlayer.selectedTrack?.duration
+                                    }}
+                                </span>
                             </div>
-                            <div class="nombre-cancion text-center" *ngIf="selectedTrack && expandContainerOther">
+                            <div class="nombre-cancion text-center" *ngIf="otherPlayer.playing">
                                 {{ "CURRENT_SONG" | translate }} <i class="fa-solid fa-arrow-right ps-2 pe-2"></i> 
-                                {{ selectedTrack.title }}
+                                {{ otherPlayer.selectedTrack?.title }}
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Songs List -->
-                <div class="container-track-list p-2">
+                <div 
+                    class="container-track-list p-2"
+                    [ngClass]="{ 'expanded': otherPlayer.expandContainer }"
+                >
                     <div class="scrollable-content">
                         <ul class="track-list">
                             <li
                                 *ngFor="let track of otherTrack; let i = index"
                                 class="track"
-                                (click)="playTrack(track, 'other')"
-                                [ngClass]="{'active': selectedTrack === track}"
+                                (click)="playTrack('other', track)"
+                                [ngClass]="{'active': otherPlayer.selectedTrack === track}"
                             >
                                 <span class="track-number">{{ i + 1 }}</span>
                                 <div class="track-info">
@@ -883,6 +1043,11 @@
                                 >
                                     <i class="fa-solid fa-download"></i>
                                 </span>
+
+                                <!-- Dynamic container to show the track lyrics -->
+                                <div *ngIf="otherPlayer.selectedTrack === track" class="lyrics-container">
+                                    <p class="lyrics">{{ track.lyrics }}</p>
+                                </div>
                             </li>
                         </ul>
                     </div>

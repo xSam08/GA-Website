@@ -272,3 +272,36 @@ p {
 .fa-arrow-right {
     color: #c0c0c0;
 }
+
+.locked-message {
+    color: var(--golden);
+    padding: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 90%;
+}
+
+.locked-message p {
+    margin: 0;
+}
+
+.fa-play {
+    font-size: 1.7rem;
+    cursor: pointer;
+}
+
+.fa-pause {
+    font-size: 1.7rem;
+    cursor: pointer;
+}
+
+.fa-stop {
+    font-size: 1.7rem;
+}
+
+.fa-stop.cursor {
+    cursor: pointer;
+}
