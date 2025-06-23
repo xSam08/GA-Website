@@ -170,7 +170,6 @@ export class MusicComponent implements AfterViewInit {
     { title: 'Soy pirata', file: 'SoyPirata.mp3', duration: '', album: "other" },
     { title: 'Un alto en el andar', file: 'UnAltoEnElAndar.mp3', duration: '', album: "other" },
     { title: 'Daniela', file: 'Daniela.mp3', duration: '', album: "other" },
-    { title: 'Ser feliz', file: 'SerFeliz.mp3', duration: '', album: "other" },
     { title: 'Colegio los Nogales', file: 'ColegioLosNogales.mp3', duration: '', album: "other" },
     { title: 'Volver a Bayamo', file: 'VolverABayamo.mp3', duration: '', album: "other" },
     { title: 'Años y años atras', file: 'YearsAndYearsBack.mp3', duration: '', album: "other" },
@@ -303,7 +302,8 @@ export class MusicComponent implements AfterViewInit {
       this.loadTrackLyrics(this.momentosTracks, 'momentos'),
       this.loadTrackLyrics(this.vivirTracks, 'vivir'),
       this.loadTrackLyrics(this.olalTracks, 'olal'),
-      this.loadTrackLyrics(this.dejameTrack, 'dejame')
+      this.loadTrackLyrics(this.dejameTrack, 'dejame'),
+      this.loadTrackLyrics(this.otherTrack, 'other')
     ]).then(() => {
       console.log('All Lyrics loaded!');
     });
