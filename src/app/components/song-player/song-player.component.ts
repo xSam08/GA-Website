@@ -53,6 +53,8 @@ export class SongPlayerComponent {
   errorMessage: string = '';
   lang: 'es' | 'en';
   showTitle: boolean = false;
+  albumExists: boolean = true;
+  songExists: boolean = true;
 
   // Translations for the notifications
   private translations = {
@@ -123,6 +125,7 @@ export class SongPlayerComponent {
 
     if (!albumData) {
       this.toastr.error(this.translations[this.lang].albumNotFound, 'Error');
+      this.albumExists = false;
       return;
     }
 
@@ -130,6 +133,7 @@ export class SongPlayerComponent {
 
     if (!songFileName) {
       this.toastr.error(this.translations[this.lang].songNotFound, 'Error');
+      this.songExists = false;
       return;
     }
 

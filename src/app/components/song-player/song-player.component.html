@@ -1,5 +1,8 @@
 <!-- Music player -->
-<div class="player-container">
+<div *ngIf="albumExists && songExists" class="player-container mt-5">
+    <img [src]="'assets/music/' + album + '/Cover.' + (album === 'beatriz' ? 'jpeg' : 'webp')"
+        [alt]="'Album Cover' + album"
+        class="img-fluid album-cover mb-4" />
     <div class="info-container text-center">
         <audio #audioPlayer controls>
             <source [attr.src]="songSrc" type="audio/mp3" />
@@ -9,4 +12,9 @@
             {{ "SONG_TITLE_PLAYER" | translate }} {{ song }}
         </h2>
     </div>
+</div>
+
+<!-- Case song doesnt exists -->
+<div *ngIf="!albumExists || !songExists" class="player-container song-title mt-5">
+    <p>{{ "SONG_NOT_FOUND" | translate }}</p>
 </div>

@@ -70,6 +70,7 @@ export class MusicComponent implements AfterViewInit {
   dejamePlayer: PlayerState = { selectedTrack: null, expandContainer: false, playing: false, isLocked: false };
   po2duetPlayer: PlayerState = { selectedTrack: null, expandContainer: false, playing: false, isLocked: false };
   otherPlayer: PlayerState = { selectedTrack: null, expandContainer: false, playing: false, isLocked: false };
+  beatrizPlayer: PlayerState = { selectedTrack: null, expandContainer: false, playing: false, isLocked: false };
 
   // Declaration of the tracks for each album
   momentosTracks: Track[] = [
@@ -146,11 +147,11 @@ export class MusicComponent implements AfterViewInit {
     { title: 'Something Stupid', file: 'SomethingStupid.mp3', duration: '', album: "po2-d" },
     { title: 'Sounds of silence', file: 'SoundsOfSilence.mp3', duration: '', album: "po2-d" },
     { title: 'Dream a little dream of me', file: 'DreamALittleDreamOfMe.mp3', duration: '', album: "po2-d" },
-    { title: 'Sway', file: 'Sway.mp3', duration: '', album: "olal" },
+    { title: 'Sway', file: 'Sway.mp3', duration: '', album: "po2-d" }
   ];
 
-  otherTrack: Track[] = [
-    { title: 'Primera cancion a Beatriz', file: 'PrimeraCancionABeatriz.mp3', duration: '', album: "other" },
+  otherTracks: Track[] = [
+    /*{ title: 'Primera cancion a Beatriz', file: 'PrimeraCancionABeatriz.mp3', duration: '', album: "other" },
     { title: 'Segunda cancion a Beatriz', file: 'SegundaCancionABeatriz.mp3', duration: '', album: "other" },
     { title: 'Tercera cancion a Beatriz', file: 'TerceraCancionABeatriz.mp3', duration: '', album: "other" },
     { title: 'Cuarta cancion a Beatriz', file: 'CuartaCancionABeatriz.mp3', duration: '', album: "other" },
@@ -160,7 +161,7 @@ export class MusicComponent implements AfterViewInit {
     { title: 'Octava cancion a Beatriz', file: 'OctavaCancionABeatriz.mp3', duration: '', album: "other" },
     { title: 'Novena cancion a Beatriz', file: 'NovenaCancionABeatriz.mp3', duration: '', album: "other" },
     { title: 'Decima cancion a Beatriz', file: 'DecimaCancionABeatriz.mp3', duration: '', album: "other" },
-    { title: 'Cuando vayas a mi pueblo', file: 'CuandoVayasAMiPueblo.mp3', duration: '', album: "other" },
+    { title: 'Cuando vayas a mi pueblo', file: 'CuandoVayasAMiPueblo.mp3', duration: '', album: "other" },*/
     { title: 'Que ha sido de tu vida', file: 'QueHaSidoDeTuVida.mp3', duration: '', album: "other" },
     { title: 'Una carrera sin final', file: 'UnaCarreraSinFinal.mp3', duration: '', album: "other" },
     { title: 'Enredado en tu recuerdo', file: 'EnredadoEnTuRecuerdo.mp3', duration: '', album: "other" },
@@ -191,6 +192,20 @@ export class MusicComponent implements AfterViewInit {
     { title: 'Mariposa', file: 'Mariposa.mp3', duration: '', album: "other" },
     { title: 'Shekina', file: 'Shekina.mp3', duration: '', album: "other" },
     { title: 'Eternity', file: 'Eternity.mp3', duration: '', album: "other" }
+  ];
+
+  beatrizTracks: Track[] = [
+    { title: 'Primera Canción a Beatriz', file: 'PrimeraCancionABeatriz.mp3', duration: '', lyrics: '', album: "beatriz" },
+    { title: 'Segunda Canción a Beatriz', file: 'SegundaCancionABeatriz.mp3', duration: '', lyrics: '', album: "beatriz" },
+    { title: 'Tercera Canción a Beatriz', file: 'TerceraCancionABeatriz.mp3', duration: '', lyrics: '', album: "beatriz" },
+    { title: 'Cuarta Canción a Beatriz', file: 'CuartaCancionABeatriz.mp3', duration: '', lyrics: '', album: "beatriz" },
+    { title: 'Quinta Canción a Beatriz', file: 'QuintaCancionABeatriz.mp3', duration: '', lyrics: '', album: "beatriz" },
+    { title: 'Sexta Canción a Beatriz', file: 'SextaCancionABeatriz.mp3', duration: '', lyrics: '', album: "beatriz" },
+    { title: 'Séptima Canción a Beatriz', file: 'SeptimaCancionABeatriz.mp3', duration: '', lyrics: '', album: "beatriz" },
+    { title: 'Octava Canción a Beatriz', file: 'OctavaCancionABeatriz.mp3', duration: '', lyrics: '', album: "beatriz" },
+    { title: 'Novena Canción a Beatriz', file: 'NovenaCancionABeatriz.mp3', duration: '', lyrics: '', album: "beatriz" },
+    { title: 'Décima Canción a Beatriz', file: 'DecimaCancionABeatriz.mp3', duration: '', lyrics: '', album: "beatriz" },
+    { title: 'Cuando Vayas a mi Pueblo', file: 'CuandoVayasAMiPueblo.mp3', duration: '', lyrics: '', album: "beatriz" }
   ];
 
 
@@ -271,7 +286,8 @@ export class MusicComponent implements AfterViewInit {
     this.loadTrackDurations(this.olalTracks, 'olal');
     this.loadTrackDurations(this.dejameTrack, 'dejame');
     this.loadTrackDurations(this.po2duetoTrack, 'po2-d');
-    this.loadTrackDurations(this.otherTrack, 'other');
+    this.loadTrackDurations(this.otherTracks, 'other');
+    this.loadTrackDurations(this.beatrizTracks, 'beatriz');
   }
 
 
@@ -303,7 +319,9 @@ export class MusicComponent implements AfterViewInit {
       this.loadTrackLyrics(this.vivirTracks, 'vivir'),
       this.loadTrackLyrics(this.olalTracks, 'olal'),
       this.loadTrackLyrics(this.dejameTrack, 'dejame'),
-      this.loadTrackLyrics(this.otherTrack, 'other')
+      this.loadTrackLyrics(this.po2duetoTrack, 'po2-d'),
+      this.loadTrackLyrics(this.otherTracks, 'other'),
+      this.loadTrackLyrics(this.beatrizTracks, 'beatriz')
     ]).then(() => {
       console.log('All Lyrics loaded!');
     });
@@ -378,6 +396,7 @@ export class MusicComponent implements AfterViewInit {
     this.resetPlayerState('dejame');
     this.resetPlayerState('po2duet');
     this.resetPlayerState('other');
+    this.resetPlayerState('beatriz');
 
     // Reset the audio player
     this.audio.src = '';
@@ -437,7 +456,7 @@ export class MusicComponent implements AfterViewInit {
    * @param player - The player that is currently being used
    */
   private lockPlayers(player: string): void {
-    const players = ['momentos', 'vivir', 'olal', 'dejame', 'po2duet', 'other'];
+    const players = ['momentos', 'vivir', 'olal', 'dejame', 'po2duet', 'other', 'beatriz'];
 
     for (const key of players) {
       if (key !== player) {
@@ -464,6 +483,9 @@ export class MusicComponent implements AfterViewInit {
       case 'other':
         this.lockedPlayer = "Additional Songs";
         break;
+      case 'beatriz':
+        this.lockedPlayer = "Beatriz";
+        break;
     }
   }
 
@@ -473,7 +495,7 @@ export class MusicComponent implements AfterViewInit {
    * @param player - The player that is currently being used
    */
   private unlockPlayers(player: string): void {
-    const players = ['momentos', 'vivir', 'olal', 'dejame', 'po2duet', 'other'];
+    const players = ['momentos', 'vivir', 'olal', 'dejame', 'po2duet', 'other', 'beatriz'];
 
     for (const key of players) {
       if (key !== player) {

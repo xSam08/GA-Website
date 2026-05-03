@@ -71,7 +71,7 @@
         "dream-a-little-dream-of-me": "DreamALittleDreamOfMe.mp3",
         "sway": "Sway.mp3"
     },
-    "other": {
+    "beatriz": {
         "primera-cancion-a-beatriz": "PrimeraCancionABeatriz.mp3",
         "segunda-cancion-a-beatriz": "SegundaCancionABeatriz.mp3",
         "tercera-cancion-a-beatriz": "TerceraCancionABeatriz.mp3",
@@ -82,7 +82,9 @@
         "octava-cancion-a-beatriz": "OctavaCancionABeatriz.mp3",
         "novena-cancion-a-beatriz": "NovenaCancionABeatriz.mp3",
         "decima-cancion-a-beatriz": "DecimaCancionABeatriz.mp3",
-        "cuando-vayas-a-mi-pueblo": "CuandoVayasAMiPueblo.mp3",
+        "cuando-vayas-a-mi-pueblo": "CuandoVayasAMiPueblo.mp3"
+    },
+    "other": {
         "que-ha-sido-de-tu-vida": "QueHaSidoDeTuVida.mp3",
         "una-carrera-sin-final": "UnaCarreraSinFinal.mp3",
         "enredado-en-tu-recuerdo": "EnredadoEnTuRecuerdo.mp3",
